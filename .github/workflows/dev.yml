@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI/CD - Develop
 
 on:
   push:
@@ -11,13 +11,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@develop
-    - uses: actions/setup-node@develop
+    - name: Checkout
+      uses: actions/checkout@master
+      with:
+        ref: 'develop'
+    - uses: actions/setup-node@master
       with:
         node-version: '12.x'
     - run: npm install
     - run: npm run build:dev
-    - uses: w9jds/firebase-action@develop
+    - uses: w9jds/firebase-action@master
       with:
         args: deploy --only hosting
       env:
