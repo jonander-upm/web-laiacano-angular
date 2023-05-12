@@ -2,6 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.1.
 
+## Service status
+
+[![CI/CD](https://github.com/jonander-upm/web-laiacano-angular/actions/workflows/dev.yml/badge.svg?branch=develop)](https://github.com/jonander-upm/web-laiacano-angular/actions/workflows/dev.yml)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
