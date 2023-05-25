@@ -84,7 +84,6 @@ a:hover {
 
 .mat-dialog-body * {
   color: var(--main-color);
-
 }
 
 .mat-dialog-body>.mat-dialog-content {
@@ -110,6 +109,10 @@ a:hover {
   border-width: 3px !important;
 }
 
+.mat-form-field {
+  display: flex;
+}
+
 .mat-dialog-actions {
   display: flex;
   justify-content: space-around;
@@ -120,4 +123,13 @@ a:hover {
   border-style: solid;
   border-color: var(--main-color);
   border-width: 3px 3px 4px 3px;
+}
+
+.mat-dialog-actions button:disabled, .mat-dialog-actions button:disabled span {
+  color: var(--hint-color);
+  border-color: var(--hint-color);
+}
+
+.mat-hint {
+  color: var(--hint-color);
 }

@@ -8,20 +8,22 @@ import { HomeComponent } from './user/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginDialogComponent } from './shared/dialogs/login-dialog/login-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {HttpClientModule} from "@angular/common/http";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatIconModule} from "@angular/material/icon";
+import { RegisterDialogComponent } from './shared/dialogs/register-dialog/register-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
     HomeComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    RegisterDialogComponent
   ],
     imports: [
         BrowserModule,
@@ -29,6 +31,7 @@ import {MatIconModule} from "@angular/material/icon";
         BrowserAnimationsModule,
         HttpClientModule,
         FormsModule,
+        ReactiveFormsModule,
         MatDialogModule,
         MatFormFieldModule,
         MatSnackBarModule,
