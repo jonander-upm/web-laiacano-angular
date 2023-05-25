@@ -8,9 +8,13 @@
     </ul>
   </nav>
   <nav class="nav-right">
-    <ul>
-      <li><a href="#">Login</a></li>
+    <ul *ngIf="!isAuthenticated()">
+      <li><a (click)="login()">Login</a></li>
       <li><a href="#">Register</a></li>
+    </ul>
+    <ul *ngIf="isAuthenticated()">
+      <li>Hi, {{username}}!</li>
+      <li><a (click)="logout()">Logout</a></li>
     </ul>
   </nav>
 </header>

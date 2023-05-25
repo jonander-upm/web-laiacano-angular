@@ -1,0 +1,23 @@
+<div class="mat-dialog-header">
+  <span mat-dialog-title>Login</span>
+  <button mat-button mat-icon-button aria-label="Close dialog" mat-dialog-close="">
+    X
+  </button>
+</div>
+<div class="mat-dialog-body">
+  <mat-dialog-content>
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Username</mat-label>
+      <input [(ngModel)]="username" matInput type="text"/>
+    </mat-form-field>
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Password</mat-label>
+      <input [(ngModel)]="password" matInput type="{{viewPassword ? 'text' : 'password'}}"/>
+      <mat-icon matSuffix (click)="toggleViewPassword()">{{viewPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button (click)="login()" mat-button>Login</button>
+  </mat-dialog-actions>
+</div>
+
