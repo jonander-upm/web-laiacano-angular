@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {LoginDialogComponent} from "../shared/dialogs/login-dialog/login-dialog.component";
 import {AuthService} from "../core/authentication.service";
+import {RegisterDialogComponent} from "../shared/dialogs/register-dialog/register-dialog.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-user',
@@ -18,13 +20,22 @@ export class UserComponent {
     this.dialog.open(LoginDialogComponent,
       {
         height: "330px",
-        width: "360px",
+        width: "475px",
         panelClass: "auth-dialog"
       })
       .afterClosed()
       .subscribe(
         () => this.username = this.auth.getUsername()
-      )
+      );
+  }
+
+  register(): void {
+    this.dialog.open(RegisterDialogComponent,
+      {
+        height: "500px",
+        width: "475px",
+        panelClass: "auth-dialog"
+      });
   }
 
   isAuthenticated(): boolean {

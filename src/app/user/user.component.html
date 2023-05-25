@@ -10,7 +10,7 @@
   <nav class="nav-right">
     <ul *ngIf="!isAuthenticated()">
       <li><a (click)="login()">Login</a></li>
-      <li><a href="#">Register</a></li>
+      <li><a (click)="register()">Register</a></li>
     </ul>
     <ul *ngIf="isAuthenticated()">
       <li>Hi, {{username}}!</li>

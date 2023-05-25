@@ -9,20 +9,27 @@ import {Role} from "./role.model";
 import {HttpService} from "./http.service";
 import {environment} from "../../environments/environment";
 import {Login} from "../shared/dialogs/login-dialog/login.model";
+import {Register} from "./register.model";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
-  static END_POINT = environment.REST_API + "/auth/login";
+  static LOGIN_END_POINT = environment.REST_API + "/auth/login";
+  static REGISTER_END_POINT = environment.REST_API + "/auth/register";
   private user: User;
 
   constructor(private httpService: HttpService, private router: Router) {
   }
 
+  register(register: Register): Observable<User> {
+    return this.httpService
+      .post(AuthService.REGISTER_END_POINT, register);
+  }
+
   login(login: Login): Observable<User> {
     return this.httpService
-      .post(AuthService.END_POINT, login)
+      .post(AuthService.LOGIN_END_POINT, login)
       .pipe(
         map(jsonToken => {
           const jwtHelper = new JwtHelperService();

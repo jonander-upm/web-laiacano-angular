@@ -1,0 +1,48 @@
+<div class="mat-dialog-header">
+  <span mat-dialog-title>Register</span>
+  <button mat-button mat-icon-button aria-label="Close dialog" mat-dialog-close="">
+    X
+  </button>
+</div>
+<div class="mat-dialog-body">
+  <mat-dialog-content [formGroup]="registrationForm">
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Username</mat-label>
+      <input [(ngModel)]="username" matInput [formControlName]="'username'" type="text"/>
+      <mat-hint *ngIf="this.registrationForm.controls['username'].invalid &&
+        (registrationForm.controls['username'].dirty || registrationForm.controls['username'].touched)">
+        {{getErrorMessage('username')}}
+      </mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Email</mat-label>
+      <input [(ngModel)]="email" matInput [formControlName]="'email'" type="email"/>
+      <mat-hint *ngIf="this.registrationForm.controls['email'].invalid &&
+        (registrationForm.controls['email'].dirty || registrationForm.controls['email'].touched)">
+        {{getErrorMessage('email')}}
+      </mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Password</mat-label>
+      <input [(ngModel)]="password" matInput [formControlName]="'password'" type="{{viewPassword ? 'text' : 'password'}}"/>
+      <mat-hint *ngIf="this.registrationForm.controls['password'].invalid &&
+        (registrationForm.controls['password'].dirty || registrationForm.controls['password'].touched)">
+        {{getErrorMessage('password')}}
+      </mat-hint>
+      <mat-icon matSuffix (click)="toggleViewPassword()">{{viewPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Repeat password</mat-label>
+      <input [(ngModel)]="repeatPassword" matInput [formControlName]="'repeatPassword'" type="{{viewRepeatPassword ? 'text' : 'password'}}"/>
+      <mat-hint *ngIf="(this.registrationForm.controls['repeatPassword'].invalid || registrationForm.hasError('notMatching')) &&
+        (registrationForm.controls['repeatPassword'].dirty || registrationForm.controls['repeatPassword'].touched)">
+        {{getErrorMessage('repeatPassword')}}
+      </mat-hint>
+      <mat-icon matSuffix (click)="toggleViewRepeatPassword()">{{viewRepeatPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button (click)="register()" mat-button [disabled]="!registrationForm.valid">>Register</button>
+  </mat-dialog-actions>
+</div>
+
