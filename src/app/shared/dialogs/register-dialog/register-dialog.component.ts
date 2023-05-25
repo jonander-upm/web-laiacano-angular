@@ -3,7 +3,7 @@ import {AuthService} from "../../../core/authentication.service";
 import {MatDialog} from "@angular/material/dialog";
 import {User} from "../../../core/user.model";
 import {Observable} from "rxjs";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {PasswordsMatchValidator} from "./validators/passwords-match.validator";
 
@@ -45,9 +45,11 @@ export class RegisterDialogComponent implements OnInit {
   }
 
   register(): void{
+    let config = new MatSnackBarConfig();
+    config.duration = 2000;
     this.auth.register({username: this.username, email: this.email, password: this.password}).subscribe(
       () => {
-        this.snackBar.open("User " + this.username + " created successfully!");
+        this.snackBar.open("User " + this.username + " created successfully!", undefined, config);
         this.dialog.closeAll();
       }
     );
