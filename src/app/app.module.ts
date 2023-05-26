@@ -12,10 +12,11 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatIconModule} from "@angular/material/icon";
 import { RegisterDialogComponent } from './shared/dialogs/register-dialog/register-dialog.component';
+import {TokenInterceptor} from "./shared/interceptors/token.interceptor";
 
 @NgModule({
   declarations: [
@@ -39,7 +40,13 @@ import { RegisterDialogComponent } from './shared/dialogs/register-dialog/regist
         MatButtonModule,
         MatIconModule,
     ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
