@@ -130,6 +130,10 @@ a:hover {
   border-color: var(--hint-color);
 }
 
+.mat-form-field:has(.mat-hint) {
+  padding-bottom: 23px;
+}
+
 .mat-hint {
   color: var(--hint-color);
 }

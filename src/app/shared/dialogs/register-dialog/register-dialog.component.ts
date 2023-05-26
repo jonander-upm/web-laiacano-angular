@@ -24,9 +24,14 @@ export class RegisterDialogComponent implements OnInit {
   constructor(private auth: AuthService, private dialog: MatDialog, private snackBar: MatSnackBar) {
     let fb = new FormBuilder();
     this.registrationForm = fb.group({
-      username: new FormControl("",[Validators.required, Validators.minLength(8), Validators.maxLength(32)]),
+      username: new FormControl("",[Validators.required, Validators.minLength(8),
+        Validators.maxLength(32)]
+      ),
       email: new FormControl("",[Validators.required, Validators.email]),
-      password: new FormControl("",[Validators.required, Validators.minLength(8), Validators.maxLength(32)]),
+      password: new FormControl("",[Validators.required, Validators.minLength(8),
+        Validators.maxLength(32),
+        Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@.$¡!%*¿?&=()#|<>\\-_])[A-Za-z\\d@.$¡!%*¿?&=()#|<>\\-_]{8,32}$")]
+      ),
       repeatPassword: new FormControl("",[Validators.required])
     }, {
       validators: PasswordsMatchValidator()
@@ -64,6 +69,7 @@ export class RegisterDialogComponent implements OnInit {
       minlength: formControlName + " must be at least 8 characters long",
       maxlength: formControlName + " cannot be longer than 32 characters",
       email: formControlName + " must have a valid email format",
+      pattern: formControlName + " must contain uppercase and lowercase letters, a number and a special character"
     }
     let validationError = Object.keys(this.registrationForm.controls[formControlName].errors)[0];
     return errorMessages[validationError];
