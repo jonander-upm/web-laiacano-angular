@@ -37,7 +37,6 @@ export class AuthService {
           this.user.username = jwtHelper.decodeToken(jsonToken.token).username;
           this.user.email = jwtHelper.decodeToken(jsonToken.token).email;
           this.user.role = jwtHelper.decodeToken(jsonToken.token).role;
-          console.log(jwtHelper.decodeToken(jsonToken.token));
           return this.user;
         })
       );
@@ -74,5 +73,9 @@ export class AuthService {
 
   getToken(): string {
     return this.user ? this.user.token : undefined;
+  }
+
+  setToken(token: string): void {
+    this.user.token = token;
   }
 }
