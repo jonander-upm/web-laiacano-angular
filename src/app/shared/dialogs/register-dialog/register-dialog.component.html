@@ -6,43 +6,52 @@
 </div>
 <div class="mat-dialog-body">
   <mat-dialog-content [formGroup]="registrationForm">
-    <mat-form-field appearance="outline" floatLabel="always">
-      <mat-label>Username</mat-label>
-      <input [(ngModel)]="username" matInput [formControlName]="'username'" type="text"/>
-      <mat-hint *ngIf="this.registrationForm.controls['username'].invalid &&
-        (registrationForm.controls['username'].dirty || registrationForm.controls['username'].touched)">
-        {{getErrorMessage('username')}}
-      </mat-hint>
-    </mat-form-field>
-    <mat-form-field appearance="outline" floatLabel="always">
-      <mat-label>Email</mat-label>
-      <input [(ngModel)]="email" matInput [formControlName]="'email'" type="email"/>
-      <mat-hint *ngIf="this.registrationForm.controls['email'].invalid &&
-        (registrationForm.controls['email'].dirty || registrationForm.controls['email'].touched)">
-        {{getErrorMessage('email')}}
-      </mat-hint>
-    </mat-form-field>
-    <mat-form-field appearance="outline" floatLabel="always">
-      <mat-label>Password</mat-label>
-      <input [(ngModel)]="password" matInput [formControlName]="'password'" type="{{viewPassword ? 'text' : 'password'}}"/>
-      <mat-hint *ngIf="this.registrationForm.controls['password'].invalid &&
-        (registrationForm.controls['password'].dirty || registrationForm.controls['password'].touched)">
-        {{getErrorMessage('password')}}
-      </mat-hint>
-      <mat-icon matSuffix (click)="toggleViewPassword()">{{viewPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
-    </mat-form-field>
-    <mat-form-field appearance="outline" floatLabel="always">
-      <mat-label>Repeat password</mat-label>
-      <input [(ngModel)]="repeatPassword" matInput [formControlName]="'repeatPassword'" type="{{viewRepeatPassword ? 'text' : 'password'}}"/>
-      <mat-hint *ngIf="(this.registrationForm.controls['repeatPassword'].invalid || registrationForm.hasError('notMatching')) &&
-        (registrationForm.controls['repeatPassword'].dirty || registrationForm.controls['repeatPassword'].touched)">
-        {{getErrorMessage('repeatPassword')}}
-      </mat-hint>
-      <mat-icon matSuffix (click)="toggleViewRepeatPassword()">{{viewRepeatPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
-    </mat-form-field>
+    <lc-input label="Username"
+              [(content)]="username"
+              [parentFormGroup]="registrationForm"
+              [formControlName]="'username'"
+              [showHint]="this.registrationForm.controls['username'].invalid &&
+                (registrationForm.controls['username'].dirty || registrationForm.controls['username'].touched)"
+              [hintLabel]="getErrorMessage('username')"
+              [fieldSize]="'responsive'">
+    </lc-input>
+    <lc-input label="Email"
+              [(content)]="email"
+              [parentFormGroup]="registrationForm"
+              [formControlName]="'email'"
+              [showHint]="this.registrationForm.controls['email'].invalid &&
+                (registrationForm.controls['email'].dirty || registrationForm.controls['email'].touched)"
+              [hintLabel]="getErrorMessage('email')"
+              [fieldSize]="'responsive'">
+    </lc-input>
+    <lc-input label="Password"
+              [(content)]="password"
+              [password]="true"
+              [parentFormGroup]="registrationForm"
+              [formControlName]="'password'"
+              [showHint]="this.registrationForm.controls['password'].invalid &&
+                (registrationForm.controls['password'].dirty || registrationForm.controls['password'].touched)"
+              [hintLabel]="getErrorMessage('password')"
+              [fieldSize]="'responsive'">
+    </lc-input>
+    <lc-input label="Repeat password"
+              [(content)]="repeatPassword"
+              [password]="true"
+              [parentFormGroup]="registrationForm"
+              [formControlName]="'repeatPassword'"
+              [showHint]="(this.registrationForm.controls['repeatPassword'].invalid ||
+                registrationForm.hasError('notMatching')) && (registrationForm.controls['repeatPassword'].dirty ||
+                registrationForm.controls['repeatPassword'].touched)"
+              [hintLabel]="getErrorMessage('repeatPassword')"
+              [fieldSize]="'responsive'">
+    </lc-input>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button (click)="register()" mat-button [disabled]="!registrationForm.valid">>Register</button>
+    <lc-button
+      [buttonText]="registerButtonText"
+      [disabled]="!registrationForm.valid"
+      (click)="register()">
+    </lc-button>
   </mat-dialog-actions>
 </div>
 

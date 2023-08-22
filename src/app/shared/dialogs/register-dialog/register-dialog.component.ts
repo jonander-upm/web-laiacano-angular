@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../../core/authentication.service";
 import {MatDialog} from "@angular/material/dialog";
-import {User} from "../../../core/user.model";
-import {Observable} from "rxjs";
 import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
-import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {PasswordsMatchValidator} from "./validators/passwords-match.validator";
 
 @Component({
   selector: 'app-register-dialog',
   templateUrl: './register-dialog.component.html',
-  styleUrls: ['./register-dialog.component.css']
+  styleUrls: ['./register-dialog.component.scss']
 })
 export class RegisterDialogComponent implements OnInit {
   username: string;
@@ -21,11 +19,13 @@ export class RegisterDialogComponent implements OnInit {
   viewRepeatPassword = false;
   registrationForm: FormGroup;
 
+  readonly registerButtonText: string = 'Register';
+
   constructor(private auth: AuthService, private dialog: MatDialog, private snackBar: MatSnackBar) {
     let fb = new FormBuilder();
     this.registrationForm = fb.group({
       username: new FormControl("",[Validators.required, Validators.minLength(8),
-        Validators.maxLength(32)]
+        Validators.maxLength(32)],
       ),
       email: new FormControl("",[Validators.required, Validators.email]),
       password: new FormControl("",[Validators.required, Validators.minLength(8),
@@ -41,14 +41,6 @@ export class RegisterDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  toggleViewPassword() {
-    this.viewPassword = !this.viewPassword;
-  }
-
-  toggleViewRepeatPassword() {
-    this.viewRepeatPassword = !this.viewRepeatPassword;
-  }
-
   register(): void{
     let config = new MatSnackBarConfig();
     config.duration = 2000;
@@ -60,10 +52,14 @@ export class RegisterDialogComponent implements OnInit {
     );
   }
 
-  getErrorMessage(formControlName: string): string {
+  getErrorMessage(formControlName: string): string | undefined {
+    if(!this.registrationForm.controls[formControlName].errors) {
+      return undefined;
+    }
     if(formControlName == "repeatPassword" && this.registrationForm.hasError("notMatching")) {
       return "The provided passwords do not match";
     }
+    let validationError = Object.keys(this.registrationForm.controls[formControlName].errors)[0];
     let errorMessages = {
       required: formControlName + " is required",
       minlength: formControlName + " must be at least 8 characters long",
@@ -71,7 +67,6 @@ export class RegisterDialogComponent implements OnInit {
       email: formControlName + " must have a valid email format",
       pattern: formControlName + " must contain uppercase and lowercase letters, a number and a special character"
     }
-    let validationError = Object.keys(this.registrationForm.controls[formControlName].errors)[0];
     return errorMessages[validationError];
   }
 }

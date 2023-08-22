@@ -1,0 +1,37 @@
+:host {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  button {
+    border: solid !important;
+    border-color: var(--main-color);
+    border-width: 3px 3px 5px 3px !important;
+    border-radius: 5px;
+    height: 40px;
+    background-color: var(--base-color);
+    font-size: medium;
+    cursor: pointer;
+    &:hover:not(:disabled) {
+      background-color: var(--base-darker-color);
+    }
+    &:disabled, :disabled span{
+      color: var(--hint-color);
+      border-color: var(--hint-color);
+      cursor: default;
+    }
+    &.btn {
+      &--small {
+        width: 80px;
+      }
+      &--medium {
+        width: 120px;
+      }
+      &--large {
+        width: 200px;
+      }
+      &--responsive {
+        width: 100%;
+      }
+    }
+  }
+}

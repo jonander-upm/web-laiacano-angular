@@ -1,0 +1,8 @@
+<div class="lc-input-wrapper field--{{ fieldSize }}" [formGroup]="parentFormGroup">
+  <span *ngIf="label" class="lc-input-label">{{ label }}</span>
+  <input class="lc-input-field" [value]="content" [formControlName]="formControlName" (change)="contentChangeEvent()" type="{{password && !viewPassword ? 'password' : 'text'}}"/>
+  <span *ngIf="showHint && hintLabel" class="lc-input-hint">
+    {{hintLabel}}
+  </span>
+  <mat-icon *ngIf="password" matSuffix (click)="toggleViewPassword()">{{viewPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+</div>

@@ -2,6 +2,7 @@
   --main-color: #495195;
   --base-color: #ffffff;
   --hint-color: #c9c9c9;
+  --base-darker-color: #ececec;
 }
 
 @font-face {
@@ -11,12 +12,12 @@
 
 * {
   box-sizing: border-box;
+  font-family: "VCR OSD Mono", sans-serif;
+  color: var(--main-color);
 }
 
 body, html {
   height: 100%;
-  font-family: "VCR OSD Mono", sans-serif;
-  color: var(--main-color);
   margin: 0;
   padding: 0;
   background-color: var(--base-color);
@@ -60,7 +61,7 @@ a:hover {
 .mat-dialog-header {
   display: flex;
   align-items: center;
-  padding: 0px 0px 0px 10px;
+  padding: 0 0 0 10px;
 }
 
 .mat-dialog-header>button {
@@ -89,51 +90,15 @@ a:hover {
 .mat-dialog-body>.mat-dialog-content {
   display: flex;
   flex-direction: column;
+  height: fit-content;
 }
 
-.mat-form-field-flex, .mat-form-field>.mat-input-element {
-  caret-color: var(--main-color) !important;
-  height: 50px;
-}
-
-.mat-form-field-infix {
-  display: flex;
-  padding: 5px !important;
-}
-
-.mat-form-field-suffix>.mat-icon {
-  color: var(--hint-color);
-}
-
-.mat-form-field-outline-start, .mat-form-field-outline-end, .mat-form-field-outline-gap {
-  border-width: 3px !important;
-}
-
-.mat-form-field {
-  display: flex;
+.mat-dialog-body>.mat-dialog-content>lc-input {
+  margin-bottom: 20px;
 }
 
 .mat-dialog-actions {
   display: flex;
   justify-content: space-around;
   margin-top: auto;
-}
-
-.mat-dialog-actions>button {
-  border-style: solid;
-  border-color: var(--main-color);
-  border-width: 3px 3px 4px 3px;
-}
-
-.mat-dialog-actions button:disabled, .mat-dialog-actions button:disabled span {
-  color: var(--hint-color);
-  border-color: var(--hint-color);
-}
-
-.mat-form-field:has(.mat-hint) {
-  padding-bottom: 23px;
-}
-
-.mat-hint {
-  color: var(--hint-color);
 }

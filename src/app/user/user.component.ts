@@ -3,7 +3,6 @@ import {MatDialog} from "@angular/material/dialog";
 import {LoginDialogComponent} from "../shared/dialogs/login-dialog/login-dialog.component";
 import {AuthService} from "../core/authentication.service";
 import {RegisterDialogComponent} from "../shared/dialogs/register-dialog/register-dialog.component";
-import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-user',
@@ -19,7 +18,7 @@ export class UserComponent {
   login(): void {
     this.dialog.open(LoginDialogComponent,
       {
-        height: "330px",
+        height: "fit-content",
         width: "475px",
         panelClass: "auth-dialog"
       })
@@ -32,7 +31,7 @@ export class UserComponent {
   register(): void {
     this.dialog.open(RegisterDialogComponent,
       {
-        height: "500px",
+        height: "fit-content",
         width: "475px",
         panelClass: "auth-dialog"
       });

@@ -5,19 +5,21 @@
   </button>
 </div>
 <div class="mat-dialog-body">
-  <mat-dialog-content>
-    <mat-form-field appearance="outline" floatLabel="always">
-      <mat-label>Username</mat-label>
-      <input [(ngModel)]="username" matInput type="text"/>
-    </mat-form-field>
-    <mat-form-field appearance="outline" floatLabel="always">
-      <mat-label>Password</mat-label>
-      <input [(ngModel)]="password" matInput type="{{viewPassword ? 'text' : 'password'}}"/>
-      <mat-icon matSuffix (click)="toggleViewPassword()">{{viewPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
-    </mat-form-field>
+  <mat-dialog-content [formGroup]="loginForm">
+    <lc-input label='Username'
+              [(content)]="username"
+              [fieldSize]="'responsive'"
+              [parentFormGroup]="loginForm"
+              [formControlName]="'username'"></lc-input>
+    <lc-input label='Password'
+              [(content)]="password"
+              [password]="true"
+              [fieldSize]="'responsive'"
+              [parentFormGroup]="loginForm"
+              [formControlName]="'password'"></lc-input>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button (click)="login()" mat-button>>Login</button>
+    <lc-button [buttonText]="loginButtonText" [buttonSize]="'medium'" (click)="login()"></lc-button>
   </mat-dialog-actions>
 </div>
 

@@ -17,6 +17,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatIconModule} from "@angular/material/icon";
 import { RegisterDialogComponent } from './shared/dialogs/register-dialog/register-dialog.component';
 import {TokenInterceptor} from "./shared/interceptors/token.interceptor";
+import { LcButtonComponent } from './shared/components/lc-button/lc-button.component';
+import { LcInputComponent } from './shared/components/lc-input/lc-input.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import {TokenInterceptor} from "./shared/interceptors/token.interceptor";
     UserComponent,
     HomeComponent,
     LoginDialogComponent,
-    RegisterDialogComponent
+    RegisterDialogComponent,
+    LcButtonComponent,
+    LcInputComponent
   ],
     imports: [
         BrowserModule,
@@ -45,7 +49,7 @@ import {TokenInterceptor} from "./shared/interceptors/token.interceptor";
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    }
+    },
   ],
   bootstrap: [AppComponent]
 })
