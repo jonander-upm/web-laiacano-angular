@@ -31,10 +31,16 @@ img {
 a {
   text-decoration: none;
   color: var(--main-color);
+  cursor: pointer;
 }
 
 a:hover {
   text-decoration: underline;
+}
+
+a.disabled a.disabled:hover {
+  pointer-events: none;
+  text-decoration: none;
 }
 
 /* DIALOGS */
@@ -93,8 +99,14 @@ a:hover {
   height: fit-content;
 }
 
-.mat-dialog-body>.mat-dialog-content>lc-input {
+.mat-dialog-body>.mat-dialog-content>* {
   margin-bottom: 20px;
+}
+
+.mat-dialog-body>.mat-dialog-content>.forgot-password-link{
+  font-size: small;
+  color: var(--hint-color);
+  cursor: help;
 }
 
 .mat-dialog-actions {

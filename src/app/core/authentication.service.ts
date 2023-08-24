@@ -10,6 +10,7 @@ import {HttpService} from "./http.service";
 import {environment} from "../../environments/environment";
 import {Login} from "../shared/dialogs/login-dialog/login.model";
 import {Register} from "./register.model";
+import {ResetPassword} from "./reset-password.model";
 
 @Injectable({
   providedIn: "root",
@@ -17,6 +18,8 @@ import {Register} from "./register.model";
 export class AuthService {
   static LOGIN_END_POINT = environment.REST_API + "/auth/login";
   static REGISTER_END_POINT = environment.REST_API + "/auth/register";
+  static FORGOT_PASSWORD_ENDPOINT = environment.REST_API + "/auth/forgot-password";
+  static RESET_PASSWORD_ENDPOINT = environment.REST_API + "/auth/reset-password";
   private user: User;
 
   constructor(private httpService: HttpService, private router: Router) {
@@ -40,6 +43,17 @@ export class AuthService {
           return this.user;
         })
       );
+  }
+
+  forgotPassword(username: string): Observable<void> {
+    return this.httpService
+      .param('username', username)
+      .get(AuthService.FORGOT_PASSWORD_ENDPOINT);
+  }
+
+  resetPassword(resetPassword: ResetPassword): Observable<void> {
+    return this.httpService
+      .put(AuthService.RESET_PASSWORD_ENDPOINT, resetPassword);
   }
 
   logout(): void {

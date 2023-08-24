@@ -17,9 +17,14 @@
               [fieldSize]="'responsive'"
               [parentFormGroup]="loginForm"
               [formControlName]="'password'"></lc-input>
+    <a class="forgot-password-link"
+       (click)="forgotPassword()"
+       [ngClass]="{ disabled: !username }">
+      Did you forget your password?
+    </a>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <lc-button [buttonText]="loginButtonText" [buttonSize]="'medium'" (click)="login()"></lc-button>
+    <lc-button [buttonText]="loginButtonText" [buttonSize]="'medium'" (clickEvent)="login()"></lc-button>
   </mat-dialog-actions>
 </div>
 
