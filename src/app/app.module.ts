@@ -19,6 +19,8 @@ import { RegisterDialogComponent } from './shared/dialogs/register-dialog/regist
 import {TokenInterceptor} from "./shared/interceptors/token.interceptor";
 import { LcButtonComponent } from './shared/components/lc-button/lc-button.component';
 import { LcInputComponent } from './shared/components/lc-input/lc-input.component';
+import {ResetPasswordDialogComponent} from "./shared/dialogs/reset-password-dialog/reset-password-dialog.component";
+import {ResetPasswordDialogWrapperComponent} from "./shared/dialogs/reset-password-dialog/wrapper/reset-password-dialog-wrapper.component";
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { LcInputComponent } from './shared/components/lc-input/lc-input.componen
     HomeComponent,
     LoginDialogComponent,
     RegisterDialogComponent,
+    ResetPasswordDialogComponent,
+    ResetPasswordDialogWrapperComponent,
     LcButtonComponent,
     LcInputComponent
   ],

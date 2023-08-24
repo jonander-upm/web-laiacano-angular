@@ -14,9 +14,7 @@ export class RegisterDialogComponent implements OnInit {
   username: string;
   email: string;
   password: string;
-  viewPassword = false;
   repeatPassword: string;
-  viewRepeatPassword = false;
   registrationForm: FormGroup;
 
   readonly registerButtonText: string = 'Register';
