@@ -3,6 +3,8 @@ import { MatDialog } from "@angular/material/dialog";
 import { AuthService } from "../../../core/authentication.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {EMPTY, tap} from "rxjs";
+import {catchError} from "rxjs/operators";
 
 @Component({
   selector: 'app-login-dialog',
@@ -12,6 +14,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class LoginDialogComponent {
   username: string;
   password: string;
+  loginError: boolean;
   loginForm: FormGroup;
 
   readonly loginButtonText: string = 'Login';
@@ -26,9 +29,13 @@ export class LoginDialogComponent {
   }
 
   login(): void {
-    this.auth.login({username: this.username, password: this.password}).subscribe(
-      () => this.dialog.closeAll()
-    );
+    this.auth.login({username: this.username, password: this.password}).pipe(
+      tap(() => this.dialog.closeAll()),
+      catchError(() => {
+        this.loginError = true;
+        return EMPTY;
+      })
+    ).subscribe();
   }
 
   forgotPassword(): void {

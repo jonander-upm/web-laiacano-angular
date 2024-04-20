@@ -1,25 +1,22 @@
 :host {
   width: 100%;
-  height: fit-content;
+  min-height: 55px;
   .lc-input-wrapper {
     position: relative;
     width: 100%;
     .lc-input-hint {
       font-size: small;
+      position: absolute;
       color: var(--hint-color);
-    }
-    &:has(.lc-input-hint) {
-      .mat-icon {
-        margin-top: 11px;
-      }
+      left: 10px;
+      top: 55px;
     }
     .mat-icon {
       color: var(--hint-color);
       position: absolute;
       z-index: 10;
       right: 10px;
-      top: 0;
-      bottom: 0;
+      top: 17px;
       margin: auto 0;
       padding-top: 2px;
       cursor: pointer;
@@ -36,20 +33,22 @@
     }
     .lc-input-label {
       position: absolute;
+      left: 7px;
       z-index: 10;
       margin-left: 10px;
-      padding: 0 5px 0 5px;
+      padding: 0 10px 0 10px;
       background-color: var(--base-color);
       &:disabled {
         color: var(--hint-color);
       }
     }
     .lc-input-field {
+      position: relative;
+      top: 5px;
       width: 100%;
-      height: 40px;
-      border:solid var(--main-color) !important;
-      border-width: 3px;
-      border-radius: 5px;
+      height: 42px;
+      border:solid 3px var(--main-color) !important;
+      border-radius: 21px;
       font-size: medium;
       padding: 5px 10px 0 10px;
       &:disabled {

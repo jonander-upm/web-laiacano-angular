@@ -1,0 +1,6 @@
+<a class="btn--{{ buttonSize }}"
+   [ngClass]="{'disabled': disabled}"
+   [routerLink]="!disabled ? hrefLink : ''"
+   (click)="btnClick.emit()">
+  {{text}}
+</a>

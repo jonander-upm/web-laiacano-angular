@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --main-color: #495195;
   --base-color: #ffffff;
@@ -6,13 +10,13 @@
 }
 
 @font-face {
-  font-family: "VCR OSD Mono";
-  src: url(assets/fonts/VCR_OSD_MONO_1.001.ttf);
+  font-family: "Varela Round";
+  src: url(assets/fonts/VarelaRound-Regular.ttf);
 }
 
 * {
   box-sizing: border-box;
-  font-family: "VCR OSD Mono", sans-serif;
+  font-family: "Varela Round", sans-serif;
   color: var(--main-color);
 }
 
@@ -47,9 +51,10 @@ a.disabled a.disabled:hover {
 
 .auth-dialog>mat-dialog-container {
   color: var(--main-color);
-  background-color: var(--main-color);
+  background-color: var(--base-color);
   padding: 5px;
-  border-radius: 8px;
+  border: solid 4px var(--main-color);
+  border-radius: 47px;
 }
 
 .auth-dialog>mat-dialog-container>:first-child {
@@ -59,15 +64,19 @@ a.disabled a.disabled:hover {
 }
 
 .auth-dialog>mat-dialog-container .mat-dialog-title {
-  font-size: large;
-  color: var(--base-color);
+  font-size: larger;
+  color: var(--main-color);
   margin-bottom: 0;
 }
 
 .mat-dialog-header {
   display: flex;
   align-items: center;
-  padding: 0 0 0 10px;
+  margin: 15px 30px 0 30px;
+}
+
+.mat-button-focus-overlay {
+  background-color:transparent;
 }
 
 .mat-dialog-header>button {
@@ -75,7 +84,7 @@ a.disabled a.disabled:hover {
   height: 20px;
   width: 20px;
   font-size: smaller;
-  line-height: 0;
+  line-height: 2px;
   background-color: var(--base-color);
 }
 
@@ -86,7 +95,7 @@ a.disabled a.disabled:hover {
   height: 100%;
   background-color: var(--base-color);
   border-radius: 6px;
-  padding: 50px 30px 30px 30px;
+  padding: 30px 30px 20px 30px;
 }
 
 .mat-dialog-body * {
@@ -96,14 +105,19 @@ a.disabled a.disabled:hover {
 .mat-dialog-body>.mat-dialog-content {
   display: flex;
   flex-direction: column;
-  height: fit-content;
+  min-height: 180px;
 }
 
 .mat-dialog-body>.mat-dialog-content>* {
   margin-bottom: 20px;
 }
 
-.mat-dialog-body>.mat-dialog-content>.forgot-password-link{
+.mat-dialog-body>.mat-dialog-content .forgot-password-wrapper{
+  padding: 10px;
+}
+
+.mat-dialog-body>.mat-dialog-content .forgot-password-link{
+  margin-top: 15px;
   font-size: small;
   color: var(--hint-color);
   cursor: help;

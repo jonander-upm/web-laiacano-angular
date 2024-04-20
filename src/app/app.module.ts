@@ -21,6 +21,10 @@ import { LcButtonComponent } from './shared/components/lc-button/lc-button.compo
 import { LcInputComponent } from './shared/components/lc-input/lc-input.component';
 import {ResetPasswordDialogComponent} from "./shared/dialogs/reset-password-dialog/reset-password-dialog.component";
 import {ResetPasswordDialogWrapperComponent} from "./shared/dialogs/reset-password-dialog/wrapper/reset-password-dialog-wrapper.component";
+import { LcLinkButtonComponent } from './shared/components/lc-link-button/lc-link-button.component';
+import { LcHeaderComponent } from './shared/components/lc-header/lc-header.component';
+import {MAT_RIPPLE_GLOBAL_OPTIONS, RippleGlobalOptions} from "@angular/material/core";
+import { LcFloatingButtonComponent } from './shared/components/lc-floating-button/lc-floating-button.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,10 @@ import {ResetPasswordDialogWrapperComponent} from "./shared/dialogs/reset-passwo
     ResetPasswordDialogComponent,
     ResetPasswordDialogWrapperComponent,
     LcButtonComponent,
-    LcInputComponent
+    LcInputComponent,
+    LcLinkButtonComponent,
+    LcHeaderComponent,
+    LcFloatingButtonComponent
   ],
     imports: [
         BrowserModule,
@@ -54,7 +61,16 @@ import {ResetPasswordDialogWrapperComponent} from "./shared/dialogs/reset-passwo
       useClass: TokenInterceptor,
       multi: true
     },
+    {
+      provide: MAT_RIPPLE_GLOBAL_OPTIONS, useValue: {
+        disabled: true,
+        animation: {
+          enterDuration: 300,
+          exitDuration: 0
+        }
+      }
+    }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

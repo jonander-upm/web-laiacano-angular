@@ -1,23 +1,4 @@
-<header>
-  <a routerLink="" id="main-logo">Laia Cano</a>
-  <nav class="nav-left">
-    <ul>
-      <li><a href="#">Gallery</a></li>
-      <li><a href="#">Shop</a></li>
-      <li><a href="#">About me</a></li>
-    </ul>
-  </nav>
-  <nav class="nav-right">
-    <ul *ngIf="!isAuthenticated()">
-      <li><a (click)="login()">Login</a></li>
-      <li><a (click)="register()">Register</a></li>
-    </ul>
-    <ul *ngIf="isAuthenticated()">
-      <li>Hi, {{username}}!</li>
-      <li><a (click)="logout()">Logout</a></li>
-    </ul>
-  </nav>
-</header>
+<lc-header></lc-header>
 <main>
   <router-outlet></router-outlet>
 </main>

@@ -148,10 +148,10 @@ export class HttpService {
     if (response.status === HttpService.UNAUTHORIZED) {
       this.showError('Unauthorized');
       this.router.navigate(['']).then();
-      return EMPTY;
+      return throwError(() => error);
     } else if (response.status === HttpService.CONNECTION_REFUSE) {
       this.showError('Connection Refuse');
-      return EMPTY;
+      return throwError(() => error);
     } else {
       try {
         error = response.error; // with 'text': JSON.parse(response.error);

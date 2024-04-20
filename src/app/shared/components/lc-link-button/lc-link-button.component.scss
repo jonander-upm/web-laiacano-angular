@@ -1,22 +1,24 @@
 :host {
   display: flex;
-  justify-content: center;
-  width: 100%;
-  button {
-    border: solid 3px var(--main-color)!important;
+  align-items: center;
+  height: 40px;
+  a {
+    border: solid 2px var(--main-color) !important;
     border-radius: 20px;
-    height: 40px;
+    padding: 4px 30px 4px 30px;
     background-color: var(--base-color);
     font-size: large;
     cursor: pointer;
+    text-decoration: none;
     transition: all 0.2s;
-    &:hover:not(:disabled) {
+    &:hover:not(.disabled) {
       background-color: var(--main-color);
-      color:  var(--base-color);
+      color: var(--base-color);
+      border-color: var(--main-color);
     }
-    &:disabled, :disabled span{
+    &.disabled {
       color: var(--hint-color);
-      border: solid 3px var(--hint-color)!important;
+      border-color: var(--hint-color);
       cursor: default;
     }
     &.btn {

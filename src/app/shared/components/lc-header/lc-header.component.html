@@ -1,0 +1,20 @@
+<header>
+  <nav class="nav-left">
+    <ul>
+      <li><lc-link-button text="Portfolio" buttonSize="responsive"></lc-link-button></li>
+      <li><lc-link-button text="Shop" buttonSize="responsive"></lc-link-button></li>
+      <li><lc-link-button text="About me" buttonSize="responsive"></lc-link-button></li>
+    </ul>
+  </nav>
+  <a routerLink="" id="main-logo">Laia Cano</a>
+  <nav class="nav-right">
+    <ul *ngIf="!isAuthenticated()">
+      <li><lc-link-button text="Login" buttonSize="responsive" (btnClick)="login()"></lc-link-button></li>
+      <li><lc-link-button text="Register" buttonSize="responsive" (btnClick)="register()"></lc-link-button></li>
+    </ul>
+    <ul *ngIf="isAuthenticated()">
+      <li class="user-message"><span>Hi, {{username}}!</span></li>
+      <li><lc-link-button text="Logout" buttonSize="responsive" (btnClick)="logout()"></lc-link-button></li>
+    </ul>
+  </nav>
+</header>
