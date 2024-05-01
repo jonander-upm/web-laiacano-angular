@@ -13,7 +13,7 @@
     <img
       class="rounded-sm max-h-full grayscale"
       [ngClass]="{ 'group-hover:opacity-80 transition-opacity': clickableImg}"
-      src="https://picsum.photos/800/600"
+      [src]="imageSrc"
       alt="Pic"
       [style.opacity]="opacityFraction"/>
   </div>
