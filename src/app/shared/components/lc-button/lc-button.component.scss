@@ -3,17 +3,29 @@
   justify-content: center;
   width: 100%;
   button {
+    &.color {
+      &--secondary {
+        background-color: var(--base-color);
+        &:hover:not(:disabled) {
+          background-color: var(--main-color);
+          color:  var(--base-color);
+        }
+      }
+      &--primary {
+        background-color: var(--main-color);
+        color:  var(--base-color);
+        &:hover:not(:disabled) {
+          background-color: var(--base-color);
+          color:  var(--main-color);
+        }
+      }
+    }
     border: solid 3px var(--main-color)!important;
     border-radius: 20px;
     height: 40px;
-    background-color: var(--base-color);
     font-size: large;
     cursor: pointer;
-    transition: all 0.2s;
-    &:hover:not(:disabled) {
-      background-color: var(--main-color);
-      color:  var(--base-color);
-    }
+    transition: background-color 0.2s, color 0.2s;
     &:disabled, :disabled span{
       color: var(--hint-color);
       border: solid 3px var(--hint-color)!important;

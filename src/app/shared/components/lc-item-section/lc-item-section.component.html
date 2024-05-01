@@ -1,0 +1,33 @@
+<div class="flex flex-col gap-4">
+  <div
+    class="bg-main border-4 rounded-md group relative"
+    [ngClass]="{'cursor-pointer': clickableImg}"
+    (click)="clickableImg && imageClick.emit(imageSrc)"
+  >
+    <mat-icon
+      *ngIf="clickableImg"
+      class="absolute bottom-0 right-0 z-20 m-2 text-basic opacity-0 group-hover:opacity-80 transition-opacity"
+    >
+      visibility
+    </mat-icon>
+    <img
+      class="rounded-sm max-h-full grayscale"
+      [ngClass]="{ 'group-hover:opacity-80 transition-opacity': clickableImg}"
+      src="https://picsum.photos/800/600"
+      alt="Pic"
+      [style.opacity]="opacityFraction"/>
+  </div>
+  <div class="flex justify-between">
+    <div class="flex flex-col gap-1">
+      <span class="text-2xl font-bold">{{ title }}</span>
+      <span class="text-base font-bold">{{ subtitle }}</span>
+    </div>
+    <lc-button
+      class="w-fit"
+      [text]="buttonText" color="primary"
+      [icon]="buttonIcon"
+      (clickEvent)="buttonClick.emit()">
+    </lc-button>
+  </div>
+</div>
+

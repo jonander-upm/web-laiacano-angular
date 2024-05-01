@@ -6,9 +6,11 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   styleUrls: ['./lc-button.component.scss']
 })
 export class LcButtonComponent implements OnInit {
-  @Input() buttonText?: string;
-  @Input() buttonSize: 'small' | 'medium' | 'large' | 'responsive' = 'medium';
+  @Input() text?: string;
+  @Input() color: LcButtonColor = 'secondary';
+  @Input() size: 'small' | 'medium' | 'large' | 'responsive' = 'medium';
   @Input() disabled?: boolean = false;
+  @Input() icon?: string;
 
   @Output() clickEvent: EventEmitter<any> = new EventEmitter();
   constructor() { }
@@ -20,3 +22,5 @@ export class LcButtonComponent implements OnInit {
     this.clickEvent.emit();
   }
 }
+
+export type LcButtonColor = 'primary' | 'secondary';
