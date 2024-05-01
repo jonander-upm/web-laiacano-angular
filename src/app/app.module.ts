@@ -25,6 +25,7 @@ import { LcLinkButtonComponent } from './shared/components/lc-link-button/lc-lin
 import { LcHeaderComponent } from './shared/components/lc-header/lc-header.component';
 import {MAT_RIPPLE_GLOBAL_OPTIONS, RippleGlobalOptions} from "@angular/material/core";
 import { LcFloatingButtonComponent } from './shared/components/lc-floating-button/lc-floating-button.component';
+import { LcItemSectionComponent } from './shared/components/lc-item-section/lc-item-section.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { LcFloatingButtonComponent } from './shared/components/lc-floating-butto
     LcInputComponent,
     LcLinkButtonComponent,
     LcHeaderComponent,
-    LcFloatingButtonComponent
+    LcFloatingButtonComponent,
+    LcItemSectionComponent
   ],
     imports: [
         BrowserModule,

@@ -8,7 +8,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class LcLinkButtonComponent implements OnInit {
   @Input() text: string;
   @Input() hrefLink: string = '';
-  @Input() buttonSize: 'small' | 'medium' | 'large' | 'responsive' = 'medium';
+  @Input() size: 'small' | 'medium' | 'large' | 'responsive' = 'medium';
   @Input() disabled?: boolean = false;
 
   @Output() btnClick: EventEmitter<void> = new EventEmitter<void>();

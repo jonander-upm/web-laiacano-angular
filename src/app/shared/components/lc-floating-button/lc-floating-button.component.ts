@@ -3,7 +3,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 @Component({
   selector: 'lc-floating-button',
   templateUrl: './lc-floating-button.component.html',
-  styleUrls: ['./lc-floating-button.component.scss']
 })
 export class LcFloatingButtonComponent implements OnInit {
   @Input() size: LcFloatingButtonSize = 'small';

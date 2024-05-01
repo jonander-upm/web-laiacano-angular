@@ -1,1 +1,15 @@
-<button class="btn--{{ buttonSize }}" (click)="btnClick()" [disabled]="disabled">{{buttonText}}</button>
+<button class="flex items-center justify-center gap-4 btn--{{ size }} color--{{ color }} text-center group"
+        (click)="btnClick()"
+        [disabled]="disabled"
+>
+  {{text}}
+  <mat-icon
+    *ngIf="icon"
+    [ngClass]="{
+      'text-main group-hover:text-basic': color === 'secondary',
+      'text-basic group-hover:text-main': color === 'primary'
+    }"
+  >
+    {{ icon }}
+  </mat-icon>
+</button>
