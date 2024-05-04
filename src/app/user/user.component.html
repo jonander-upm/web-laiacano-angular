@@ -1,12 +1,24 @@
 <lc-header></lc-header>
-<main>
-  <router-outlet></router-outlet>
-</main>
-<footer>
-  <nav id="nav-footer">
-    <ul>
-      <li><a href="#">Privacy</a></li>
-      <li><a href="#">Terms</a></li>
-    </ul>
-  </nav>
-</footer>
+<lc-subheader
+  *ngIf="subheaderData"
+  [title]="subheaderData.title"
+  [filterData]="subheaderData.filterData"
+></lc-subheader>
+<div
+  class="h-content overflow-y-auto"
+  [ngClass]="{
+    'h-contentSmall': subheaderData
+  }"
+>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+  <footer>
+    <nav id="nav-footer">
+      <ul>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+      </ul>
+    </nav>
+  </footer>
+</div>

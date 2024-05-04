@@ -11,8 +11,11 @@
       visibility
     </mat-icon>
     <img
-      class="rounded-sm max-h-full grayscale"
-      [ngClass]="{ 'group-hover:opacity-80 transition-opacity': clickableImg}"
+      class="rounded-sm w-full max-h-full group-hover:grayscale transition-colors"
+      [ngClass]="{
+        'group-hover:opacity-80 transition-opacity': clickableImg,
+        'grayscale': clickableImg && opacity < 100
+      }"
       [src]="imageSrc"
       alt="Pic"
       [style.opacity]="opacityFraction"/>

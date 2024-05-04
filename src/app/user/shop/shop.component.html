@@ -1,0 +1,17 @@
+<div class="columns-3 gap-10 px-page pt-8">
+  <div
+    *ngFor="let item of mockProductList"
+    class="py-4 break-inside-avoid-column"
+  >
+    <lc-item-section
+      [title]="item.title"
+      [subtitle]="item.format"
+      [imageSrc]="item.imageSrc"
+      [clickableImg]="true"
+      buttonText="{{ item.price }} {{ CURRENCY_SYMBOL }}"
+      buttonIcon="add_shopping_cart"
+      (imageClick)="viewImage($event)"
+      (buttonClick)="addToCart(item.id)"
+    ></lc-item-section>
+  </div>
+</div>

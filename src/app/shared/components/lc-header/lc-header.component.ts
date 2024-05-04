@@ -3,6 +3,7 @@ import {LoginDialogComponent} from "../../dialogs/login-dialog/login-dialog.comp
 import {RegisterDialogComponent} from "../../dialogs/register-dialog/register-dialog.component";
 import {AuthService} from "../../../core/authentication.service";
 import {MatDialog} from "@angular/material/dialog";
+import {Route} from "../../enums/route";
 
 @Component({
   selector: 'lc-header',
@@ -11,6 +12,7 @@ import {MatDialog} from "@angular/material/dialog";
 })
 export class LcHeaderComponent implements OnInit {
   username = undefined;
+  readonly Route = Route;
 
   constructor(private auth: AuthService, private dialog: MatDialog) {
   }
