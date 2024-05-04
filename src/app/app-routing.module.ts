@@ -4,16 +4,28 @@ import {HomeComponent} from "./user/home/home.component";
 import {
   ResetPasswordDialogWrapperComponent
 } from "./shared/dialogs/reset-password-dialog/wrapper/reset-password-dialog-wrapper.component";
+import {ShopComponent} from "./user/shop/shop.component";
+import {Route} from "./shared/enums/route";
 
 const routes: Routes = [
   {
-    path: '',
+    path: Route.HOME,
     component: HomeComponent,
     children: [{
       path: 'reset-password',
       component: ResetPasswordDialogWrapperComponent,
     }]
-  }
+  },
+  {
+    path: Route.SHOP,
+    component: ShopComponent,
+    data: {
+      subheaderData: {
+        title: 'Shop',
+        filterData: {}
+      } ,
+    },
+  },
 ];
 
 @NgModule({

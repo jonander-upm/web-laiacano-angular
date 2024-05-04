@@ -3,10 +3,17 @@
 @tailwind utilities;
 
 :root {
+  /* COLORS */
   --main-color: #495195;
   --base-color: #ffffff;
   --hint-color: #c9c9c9;
   --base-darker-color: #ececec;
+
+  /* DIMENSIONS */
+  --header-height: 70px;
+  --subheader-height: 140px;
+  --content-height-base: calc(100vh - var(--header-height));
+  --content-height-sm: calc(100vh - var(--header-height) - var(--subheader-height));
 }
 
 @font-face {

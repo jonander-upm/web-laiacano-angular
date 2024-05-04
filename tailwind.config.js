@@ -1,13 +1,27 @@
 module.exports = {
+  jit: true,
   content: ["./src/**/*.{html,js}"],
   theme: {
     colors: {
-      main: "var(--main-color)",
-      basic: "var(--base-color)",
-      hint: "var(--hint-color)",
-      basicDarker: "var(--base-darker-color)",
+      main: 'var(--main-color)',
+      basic: 'var(--base-color)',
+      hint: 'var(--hint-color)',
+      basicDarker: 'var(--base-darker-color)',
     },
-    extend: {},
+    extend: {
+      height: {
+        header: 'var(--header-height)',
+        subheader: 'var(--subheader-height)',
+        content: 'var(--content-height-base)',
+        contentSmall: 'var(--content-height-sm)',
+      },
+      padding: {
+        page: '70px',
+      },
+      boxShadow: {
+        toolbarBottom: 'rgba(0, 0, 0, 0.1) 0px 11px 11px 0px',
+      }
+    },
   },
   important: true,
   variants: {
