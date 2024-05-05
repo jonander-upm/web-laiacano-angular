@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {ImageViewComponent} from "../../shared/dialogs/image-view/image-view.component";
+import {ProductService} from "../../shared/services/product.service";
+import {map, tap} from "rxjs/operators";
+import {filter} from "rxjs";
+import {Format, Product} from "../../shared/services/product.model";
 
 @Component({
   selector: 'lc-shop',
@@ -8,46 +12,38 @@ import {ImageViewComponent} from "../../shared/dialogs/image-view/image-view.com
 })
 export class ShopComponent implements OnInit {
   readonly CURRENCY_SYMBOL = '$';
-  readonly mockProductList: Product[] = [
-    {
-      id: '1',
-      title: 'Test Product 1',
-      format: 'Digital',
-      price: 30,
-      imageSrc: 'https://picsum.photos/1200/700',
-    },
-    {
-      id: '2',
-      title: 'Test Product 2',
-      price: 120,
-      imageSrc: 'https://picsum.photos/700/1200',
-    },
-    {
-      id: '3',
-      title: 'Test Product 3',
-      format: 'Digital',
-      price: 60,
-      imageSrc: 'https://picsum.photos/1000/1000',
-    },
-    {
-      id: '4',
-      title: 'Test Product 4',
-      format: 'Digital',
-      price: 10,
-      imageSrc: 'https://picsum.photos/2000/1000',
+  readonly SOLD_OUT = 'Sold Out';
 
-    },
-    {
-      id: '5',
-      title: 'Test Product 5',
-      price: 900,
-      imageSrc: 'https://picsum.photos/500/800',
-    },
-  ];
+  productList: LcProductItem[] = [];
 
-  constructor(private readonly dialog: MatDialog) { }
+  constructor(private readonly dialog: MatDialog, private readonly productService: ProductService) { }
 
   ngOnInit(): void {
+    this.getProductList();
+  }
+
+  private getProductList() {
+    this.productService.getProducts().pipe(
+      filter(products => products !== undefined),
+      map(products =>
+        products.flatMap(product =>
+          this.mapProductItem(product)
+        )
+      ),
+      tap(productItems => this.productList = productItems),
+    ).subscribe();
+  }
+
+  private mapProductItem(product: Product): LcProductItem {
+    return {
+      id: product.id,
+      title: product.portfolioItem.name,
+      format: Format[product.format] === Format.DIGITAL ? `( ${ Format[product.format] } )` : undefined,
+      price: product.stock ? `${ product.price } ${ this.CURRENCY_SYMBOL }` : this.SOLD_OUT,
+      imageSrc: product.portfolioItem.imageSrc,
+      stock: product.stock,
+      disabled: !product.stock,
+    }
   }
 
   viewImage(imageSrc: string) {
@@ -63,10 +59,12 @@ export class ShopComponent implements OnInit {
   }
 }
 
-export interface Product {
+export interface LcProductItem {
   id: string;
   title: string;
   format?: string;
-  price: number;
+  price: string;
   imageSrc: string;
+  stock: number;
+  disabled?: boolean;
 }

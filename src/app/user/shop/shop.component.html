@@ -1,6 +1,6 @@
 <div class="columns-3 gap-10 px-page pt-8">
   <div
-    *ngFor="let item of mockProductList"
+    *ngFor="let item of productList"
     class="py-4 break-inside-avoid-column"
   >
     <lc-item-section
@@ -8,8 +8,9 @@
       [subtitle]="item.format"
       [imageSrc]="item.imageSrc"
       [clickableImg]="true"
-      buttonText="{{ item.price }} {{ CURRENCY_SYMBOL }}"
-      buttonIcon="add_shopping_cart"
+      [buttonText]="item.price"
+      [buttonDisabled]="item.disabled"
+      [buttonIcon]="!item.disabled ? 'add_shopping_cart' : undefined"
       (imageClick)="viewImage($event)"
       (buttonClick)="addToCart(item.id)"
     ></lc-item-section>

@@ -10,6 +10,7 @@ export class LcItemSectionComponent implements OnInit {
   @Input() imageSrc?: string;
   @Input() buttonText?: string;
   @Input() buttonIcon?: string;
+  @Input() buttonDisabled?: boolean;
   @Input() clickableImg?: boolean;
   @Input() opacity: number = 100;
 
