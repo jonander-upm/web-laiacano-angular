@@ -10,6 +10,11 @@
           background-color: var(--main-color);
           color:  var(--base-color);
         }
+        &:disabled, &:disabled span {
+          color: var(--hint-color);
+          border: solid 3px var(--hint-color)!important;
+          cursor: default;
+        }
       }
       &--primary {
         background-color: var(--main-color);
@@ -17,6 +22,11 @@
         &:hover:not(:disabled) {
           background-color: var(--base-color);
           color:  var(--main-color);
+        }
+        &:disabled, &:disabled span {
+          background-color: var(--hint-color);
+          border: solid 3px var(--hint-color)!important;
+          cursor: default;
         }
       }
     }
@@ -26,11 +36,6 @@
     font-size: large;
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
-    &:disabled, :disabled span{
-      color: var(--hint-color);
-      border: solid 3px var(--hint-color)!important;
-      cursor: default;
-    }
     &.btn {
       &--small {
         width: 80px;

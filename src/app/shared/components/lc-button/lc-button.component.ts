@@ -19,6 +19,9 @@ export class LcButtonComponent implements OnInit {
   }
 
   btnClick(): any {
+    if(this.disabled) {
+      return;
+    }
     this.clickEvent.emit();
   }
 }
