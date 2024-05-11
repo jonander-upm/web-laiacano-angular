@@ -2,7 +2,7 @@
   <div
     class="bg-main border-4 rounded-md group relative"
     [ngClass]="{'cursor-pointer': clickableImg}"
-    (click)="clickableImg && imageClick.emit(imageSrc)"
+    (click)="clickableImg && imageClick.emit(imageUrl)"
   >
     <mat-icon
       *ngIf="clickableImg"
@@ -16,7 +16,7 @@
         'group-hover:opacity-80 transition-opacity': clickableImg,
         'grayscale': clickableImg && opacity < 100
       }"
-      [src]="imageSrc"
+      [src]="imageUrl"
       alt="Pic"
       [style.opacity]="opacityFraction"/>
   </div>
