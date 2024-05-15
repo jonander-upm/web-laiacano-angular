@@ -17,6 +17,7 @@ import {data} from "autoprefixer";
 export class UserComponent implements OnInit {
 
   subheaderData?: LcSubheaderData;
+  showFilters: boolean = false;
 
   constructor(private readonly router: Router, private readonly activatedRoute: ActivatedRoute) {
   }
@@ -31,5 +32,9 @@ export class UserComponent implements OnInit {
       mergeMap(() => this.activatedRoute.firstChild.data),
       tap(data => this.subheaderData = data['subheaderData']),
     ).subscribe();
+  }
+
+  toggleFilters(filtersShown: boolean): void {
+    this.showFilters = filtersShown;
   }
 }

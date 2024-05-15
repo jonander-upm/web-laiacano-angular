@@ -1,24 +1,28 @@
-<lc-header></lc-header>
-<lc-subheader
-  *ngIf="subheaderData"
-  [title]="subheaderData.title"
-  [filterData]="subheaderData.filterData"
-></lc-subheader>
-<div
-  class="h-content overflow-y-auto"
-  [ngClass]="{
-    'h-contentSmall': subheaderData
+<div>
+  <lc-header></lc-header>
+  <lc-subheader
+    *ngIf="subheaderData"
+    [title]="subheaderData.title"
+    [hasFilters]="subheaderData.hasFilters"
+    (toggleFilterEvent)="toggleFilters($event)"
+  ></lc-subheader>
+  <div
+    class="h-content overflow-y-auto transition-height"
+    [ngClass]="{
+    'h-contentSmall': subheaderData && !showFilters,
+    'h-contentXSmall': subheaderData && showFilters
   }"
->
-  <main>
-    <router-outlet></router-outlet>
-  </main>
-  <footer>
-    <nav id="nav-footer">
-      <ul>
-        <li><a href="#">Privacy</a></li>
-        <li><a href="#">Terms</a></li>
-      </ul>
-    </nav>
-  </footer>
+  >
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+    <footer>
+      <nav id="nav-footer">
+        <ul>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </nav>
+    </footer>
+  </div>
 </div>

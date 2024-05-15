@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'lc-subheader',
@@ -6,29 +6,26 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class LcSubheaderComponent implements OnInit {
   @Input() title: string = '';
-  @Input() filterData?: LcFilterData;
+  @Input() hasFilters?: boolean;
+
+  @Output() toggleFilterEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  showFilters: boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.toggleFilterEvent.emit(false);
   }
 
+  toggleFilters(): void {
+    this.showFilters = !this.showFilters;
+    this.toggleFilterEvent.emit(this.showFilters);
+  }
 }
 
 export interface LcSubheaderData {
   title: string;
-  filterData: LcFilterData;
+  hasFilters: boolean;
 }
 
-export interface LcFilterData {
-  title?: string;
-  type?: LcFilterType;
-  options?: LcDropdownOption[];
-  selectedOption?: string;
-}
-export type LcFilterType = 'text' | 'dropdown' | 'date';
-export interface LcDropdownOption {
-  id: string;
-  text: string;
-  enabled: boolean;
-}
