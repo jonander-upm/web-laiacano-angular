@@ -8,12 +8,16 @@
   --base-color: #ffffff;
   --hint-color: #c9c9c9;
   --base-darker-color: #ececec;
+  --base-hover-color: #ececec;
 
   /* DIMENSIONS */
   --header-height: 70px;
   --subheader-height: 140px;
+  --filter-height: 80px;
+  --subheader-filter-height: calc(var(--subheader-height) + var(--filter-height));
   --content-height-base: calc(100vh - var(--header-height));
   --content-height-sm: calc(100vh - var(--header-height) - var(--subheader-height));
+  --content-height-xs: calc(100vh - var(--header-height) - var(--subheader-filter-height));
 }
 
 @font-face {

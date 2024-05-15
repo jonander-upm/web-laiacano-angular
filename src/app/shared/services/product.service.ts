@@ -12,7 +12,10 @@ export class ProductService {
 
   constructor(private readonly httpService: HttpService) { }
 
-  getProducts(): Observable<Product[]> {
-    return this.httpService.get(this.PRODUCT_ENDPOINT);
+  getProducts(title?: string, format?: string): Observable<Product[]> {
+    return this.httpService
+      .param('name', title)
+      .param('format', format)
+      .get(this.PRODUCT_ENDPOINT);
   }
 }

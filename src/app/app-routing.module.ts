@@ -22,7 +22,7 @@ const routes: Routes = [
     data: {
       subheaderData: {
         title: 'Shop',
-        filterData: {}
+        hasFilters: true,
       } ,
     },
   },

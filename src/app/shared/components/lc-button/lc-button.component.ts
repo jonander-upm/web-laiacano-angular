@@ -11,6 +11,7 @@ export class LcButtonComponent implements OnInit {
   @Input() size: 'small' | 'medium' | 'large' | 'responsive' = 'medium';
   @Input() disabled?: boolean = false;
   @Input() icon?: string;
+  @Input() toggled?: boolean;
 
   @Output() clickEvent: EventEmitter<any> = new EventEmitter();
   constructor() { }

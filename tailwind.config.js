@@ -7,20 +7,27 @@ module.exports = {
       basic: 'var(--base-color)',
       hint: 'var(--hint-color)',
       basicDarker: 'var(--base-darker-color)',
+      basicHover: 'var(--base-hover-color)'
     },
     extend: {
       height: {
         header: 'var(--header-height)',
         subheader: 'var(--subheader-height)',
+        filter: 'var(--filter-height)',
+        subheaderFilters: 'var(--subheader-filter-height)',
         content: 'var(--content-height-base)',
         contentSmall: 'var(--content-height-sm)',
+        contentXSmall: 'var(--content-height-xs)',
       },
       padding: {
         page: '70px',
       },
       boxShadow: {
         toolbarBottom: 'rgba(0, 0, 0, 0.1) 0px 11px 11px 0px',
-      }
+      },
+      transitionProperty: {
+        height: 'height',
+      },
     },
   },
   important: true,

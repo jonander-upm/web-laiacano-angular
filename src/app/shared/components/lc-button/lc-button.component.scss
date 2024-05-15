@@ -6,7 +6,7 @@
     &.color {
       &--secondary {
         background-color: var(--base-color);
-        &:hover:not(:disabled) {
+        &:hover:not(:disabled), &.toggled:not(:disabled) {
           background-color: var(--main-color);
           color:  var(--base-color);
         }
@@ -19,7 +19,7 @@
       &--primary {
         background-color: var(--main-color);
         color:  var(--base-color);
-        &:hover:not(:disabled) {
+        &:hover:not(:disabled), &.toggled:not(:disabled) {
           background-color: var(--base-color);
           color:  var(--main-color);
         }

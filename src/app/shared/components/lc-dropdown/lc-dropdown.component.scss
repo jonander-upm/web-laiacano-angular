@@ -1,18 +1,11 @@
 :host {
   width: 100%;
   min-height: 55px;
-  .lc-input-wrapper {
+  .lc-dropdown-wrapper {
     position: relative;
     width: 100%;
-    .lc-input-hint {
-      font-size: small;
-      position: absolute;
-      color: var(--hint-color);
-      left: 10px;
-      top: 55px;
-    }
     .mat-icon {
-      color: var(--hint-color);
+      color: var(--main-color);
       position: absolute;
       z-index: 10;
       right: 10px;
@@ -22,16 +15,16 @@
       cursor: pointer;
     }
     &:has(.mat-icon) {
-      .lc-input-field {
+      .lc-dropdown-field {
         padding-right: 40px;
       }
     }
-    &:has(.lc-input-label) {
-      .lc-input-field {
+    &:has(.lc-dropdown-label) {
+      .lc-dropdown-field {
         margin-top: 5px;
       }
     }
-    .lc-input-label {
+    .lc-dropdown-label {
       position: absolute;
       left: 7px;
       z-index: 10;
@@ -42,7 +35,7 @@
         color: var(--hint-color);
       }
     }
-    .lc-input-field {
+    .lc-dropdown-field {
       position: relative;
       top: 5px;
       width: 100%;

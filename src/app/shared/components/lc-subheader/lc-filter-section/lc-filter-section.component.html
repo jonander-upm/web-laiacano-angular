@@ -1,0 +1,15 @@
+<div class="flex justify-end items-end gap-6 h-filter">
+  <lc-input
+    class="h-fit w-fit"
+    label="Item name"
+    fieldSize="large"
+    (contentChange)="applyFilters('title', $event)"
+  ></lc-input>
+  <lc-dropdown
+    class="h-fit w-fit"
+    label="Format"
+    fieldSize="medium"
+    [options]="formatOptions"
+    (optionSelected)="applyFilters('format', $event)"
+  ></lc-dropdown>
+</div>

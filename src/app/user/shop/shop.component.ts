@@ -3,8 +3,9 @@ import {MatDialog} from "@angular/material/dialog";
 import {ImageViewComponent} from "../../shared/dialogs/image-view/image-view.component";
 import {ProductService} from "../../shared/services/product.service";
 import {map, tap} from "rxjs/operators";
-import {filter} from "rxjs";
+import {filter, mergeMap} from "rxjs";
 import {Format, Product} from "../../shared/services/product.model";
+import {FilterService} from "../../shared/services/filter.service";
 
 @Component({
   selector: 'lc-shop',
@@ -16,21 +17,27 @@ export class ShopComponent implements OnInit {
 
   productList: LcProductItem[] = [];
 
-  constructor(private readonly dialog: MatDialog, private readonly productService: ProductService) { }
+  constructor(private readonly dialog: MatDialog,
+              private readonly productService: ProductService,
+              private readonly filterService: FilterService,
+  ) { }
 
   ngOnInit(): void {
     this.getProductList();
   }
 
   private getProductList() {
-    this.productService.getProducts().pipe(
-      filter(products => products !== undefined),
-      map(products =>
-        products.flatMap(product =>
-          this.mapProductItem(product)
-        )
+    this.filterService.getFilters().pipe(
+      mergeMap(filters =>
+        this.productService.getProducts(filters.title, filters.format)
       ),
-      tap(productItems => this.productList = productItems),
+      filter(products => products !== undefined),
+        map(products =>
+          products.flatMap(product =>
+            this.mapProductItem(product)
+          )
+        ),
+        tap(productItems => this.productList = productItems),
     ).subscribe();
   }
 

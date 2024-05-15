@@ -1,0 +1,52 @@
+<div
+  class="lc-dropdown-wrapper field--{{ fieldSize }} relative"
+  [ngClass]="{
+    'w-30': fieldSize === 'small',
+    'w-60': fieldSize === 'medium',
+    'w-80': fieldSize === 'large',
+    'w-full': fieldSize === 'responsive'
+  }"
+  (click)="focusInput()"
+>
+  <span *ngIf="label" class="lc-dropdown-label">{{ label }}</span>
+  <input
+    #dropdownInput
+    class="lc-dropdown-field cursor-pointer"
+    [value]="selectedOption?.label ?? ''"
+    (focusin)="openContent()"
+    (focusout)="closeContent()"
+    readonly
+  />
+  <mat-icon
+    class="transition-transform"
+    [ngClass]="{ 'rotate-180': showContent }"
+  >
+    keyboard_arrow_down
+  </mat-icon>
+</div>
+<div
+  *ngIf="showContent"
+  @fadeInOut
+  class="flex flex-col gap-1 h-fit min-w-fit w- border-[3px] border-main bg-basic rounded-2xl p-1 absolute z-50 mt-3"
+  [ngClass]="{
+      'w-30': fieldSize === 'small',
+      'w-60': fieldSize === 'medium',
+      'w-80': fieldSize === 'large'
+  }"
+>
+  <div
+    *ngFor="let option of options"
+    class="p-3 bg-basic rounded-xl cursor-pointer transition-colors"
+    [ngClass]="{
+      'hover:bg-basicHover': !option.selected,
+      'bg-main': option.selected
+    }"
+    (click)="selectOption(option.id)"
+  >
+    <span
+      [ngClass]="{ 'text-basic': option.selected }"
+    >
+      {{ option.label }}
+    </span>
+  </div>
+</div>

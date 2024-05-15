@@ -29,6 +29,8 @@ import { LcItemSectionComponent } from './shared/components/lc-item-section/lc-i
 import { ImageViewComponent } from './shared/dialogs/image-view/image-view.component';
 import { ShopComponent } from './user/shop/shop.component';
 import { LcSubheaderComponent } from './shared/components/lc-subheader/lc-subheader.component';
+import { LcFilterSectionComponent } from './shared/components/lc-subheader/lc-filter-section/lc-filter-section.component';
+import { LcDropdownComponent } from './shared/components/lc-dropdown/lc-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { LcSubheaderComponent } from './shared/components/lc-subheader/lc-subhea
     LcItemSectionComponent,
     ImageViewComponent,
     ShopComponent,
-    LcSubheaderComponent
+    LcSubheaderComponent,
+    LcFilterSectionComponent,
+    LcDropdownComponent
   ],
     imports: [
         BrowserModule,
