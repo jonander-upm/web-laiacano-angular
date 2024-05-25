@@ -1,0 +1,20 @@
+<div
+  class="flex justify-between items-center w-full px-10 py-5 cursor-pointer"
+  (click)="toggleShowContent()"
+>
+  <span class="text-3xl">
+    {{ title }}
+  </span>
+  <mat-icon
+    class="transition-transform text-4xl origin-center w-fit h-fit"
+    [ngClass]="{ 'rotate-180': showContent }"
+  >
+    keyboard_arrow_down
+  </mat-icon>
+</div>
+<lc-dropdown-section-content
+  [content]="content"
+  [showContent]="showContent"
+>
+</lc-dropdown-section-content>
+
