@@ -24,6 +24,7 @@ module.exports = {
       },
       boxShadow: {
         toolbarBottom: 'rgba(0, 0, 0, 0.1) 0px 11px 11px 0px',
+        sectionTopBottom: 'inset rgba(0, 0, 0, 0.07) 0px -6px 11px 0px, inset rgba(0, 0, 0, 0.07) 0px 6px 11px 0px',
       },
       transitionProperty: {
         height: 'height',
