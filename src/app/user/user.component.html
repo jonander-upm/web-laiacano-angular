@@ -13,8 +13,16 @@
     'h-contentXSmall': subheaderData && showFilters
   }"
   >
-    <main>
+    <main class="relative">
       <router-outlet></router-outlet>
+      <lc-floating-button
+        *ngIf="shoppingCartItemNumber$ | async"
+        class="flex sticky bottom-10 z-20 w-max mr-10 mt-5 ml-auto"
+        icon="shopping_cart"
+        size="big"
+        [badgeValue]="shoppingCartItemNumber$  | async"
+        @fade
+      ></lc-floating-button>
     </main>
     <footer>
       <nav id="nav-footer">

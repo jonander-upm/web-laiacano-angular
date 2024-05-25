@@ -1,25 +1,39 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {LoginDialogComponent} from "../shared/dialogs/login-dialog/login-dialog.component";
-import {AuthService} from "../core/authentication.service";
-import {RegisterDialogComponent} from "../shared/dialogs/register-dialog/register-dialog.component";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {LcSubheaderData} from "../shared/components/lc-subheader/lc-subheader.component";
-import {filter, flatMap, mergeMap, tap} from "rxjs";
-import {map} from "rxjs/operators";
-import {data} from "autoprefixer";
+import {filter, mergeMap, Observable, tap} from "rxjs";
+import {ShoppingCartService} from "../shared/services/shopping-cart.service";
+import {animate, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  styleUrls: ['./user.component.scss'],
+  animations: [
+    trigger('fade', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate(300, style({ opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate(300, style({ opacity: 0 }))
+      ])
+    ])
+  ]
 })
 export class UserComponent implements OnInit {
 
   subheaderData?: LcSubheaderData;
   showFilters: boolean = false;
 
-  constructor(private readonly router: Router, private readonly activatedRoute: ActivatedRoute) {
+  readonly shoppingCartItemNumber$: Observable<number>;
+
+  constructor(
+    private readonly router: Router,
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly shoppingCartService: ShoppingCartService
+  ) {
+    this.shoppingCartItemNumber$ = this.shoppingCartService.getShoppingCartItemNumber();
   }
 
   ngOnInit(): void {

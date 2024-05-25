@@ -6,6 +6,7 @@ import {map, tap} from "rxjs/operators";
 import {filter, mergeMap} from "rxjs";
 import {Format, Product} from "../../shared/services/product.model";
 import {FilterService} from "../../shared/services/filter.service";
+import {ShoppingCartService} from "../../shared/services/shopping-cart.service";
 
 @Component({
   selector: 'lc-shop',
@@ -17,9 +18,11 @@ export class ShopComponent implements OnInit {
 
   productList: LcProductItem[] = [];
 
-  constructor(private readonly dialog: MatDialog,
-              private readonly productService: ProductService,
-              private readonly filterService: FilterService,
+  constructor(
+    private readonly dialog: MatDialog,
+    private readonly productService: ProductService,
+    private readonly filterService: FilterService,
+    private readonly shoppingCartService: ShoppingCartService,
   ) { }
 
   ngOnInit(): void {
@@ -61,8 +64,8 @@ export class ShopComponent implements OnInit {
     imgDialog.componentInstance.imageSrc = imageSrc;
   }
 
-  addToCart(id: string) {
-    // TODO: Implement functionality
+  addToCart(product: LcProductItem) {
+    this.shoppingCartService.addProductToCart(product);
   }
 }
 
