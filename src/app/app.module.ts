@@ -31,6 +31,7 @@ import { ShopComponent } from './user/shop/shop.component';
 import { LcSubheaderComponent } from './shared/components/lc-subheader/lc-subheader.component';
 import { LcFilterSectionComponent } from './shared/components/lc-subheader/lc-filter-section/lc-filter-section.component';
 import { LcDropdownComponent } from './shared/components/lc-dropdown/lc-dropdown.component';
+import { LcBadgeComponent } from './shared/components/lc-badge/lc-badge.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { LcDropdownComponent } from './shared/components/lc-dropdown/lc-dropdown
     ShopComponent,
     LcSubheaderComponent,
     LcFilterSectionComponent,
-    LcDropdownComponent
+    LcDropdownComponent,
+    LcBadgeComponent
   ],
     imports: [
         BrowserModule,

@@ -1,5 +1,25 @@
-<button class="flex justify-center items-center h-16 w-16 rounded-full border-0 bg-main cursor-pointer text-xl shadow-xl drop-shadow-xl"
-        (click)="btnClick.emit()"
+<lc-badge
+  class="absolute right-0 z-30"
+  *ngIf="badgeValue !== undefined"
+  [value]="badgeValue"
+></lc-badge>
+<button
+  class="relative flex justify-center items-center rounded-full border-0 bg-main cursor-pointer text-xl shadow-xl drop-shadow-xl"
+  [ngClass]=" {
+    'h-12 w-12': size === 'small',
+    'h-16 w-16': size === 'medium',
+    'h-20 w-20': size === 'big'
+  }"
+  (click)="btnClick.emit()"
 >
-  <mat-icon class="w-auto h-auto text-basic text-3xl">{{ icon }}</mat-icon>
+  <mat-icon
+    class="w-auto h-auto text-basic "
+    [ngClass]=" {
+      'text-xl': size === 'small',
+      'text-3xl': size === 'medium',
+      'text-4xl': size === 'big'
+    }"
+  >
+    {{ icon }}
+  </mat-icon>
 </button>

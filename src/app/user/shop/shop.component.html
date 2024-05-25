@@ -12,7 +12,7 @@
       [buttonDisabled]="item.disabled"
       [buttonIcon]="!item.disabled ? 'add_shopping_cart' : undefined"
       (imageClick)="viewImage($event)"
-      (buttonClick)="addToCart(item.id)"
+      (buttonClick)="addToCart(item)"
     ></lc-item-section>
   </div>
 </div>

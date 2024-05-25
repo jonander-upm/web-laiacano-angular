@@ -8,6 +8,7 @@ export class LcFloatingButtonComponent implements OnInit {
   @Input() size: LcFloatingButtonSize = 'small';
   @Input() color: LcFloatingButtonColor = 'primary';
   @Input() icon?: string;
+  @Input() badgeValue?: number;
 
   @Output() btnClick: EventEmitter<void> = new EventEmitter<void>();
 
