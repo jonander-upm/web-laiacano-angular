@@ -34,6 +34,8 @@ import { LcDropdownComponent } from './shared/components/lc-dropdown/lc-dropdown
 import { LcBadgeComponent } from './shared/components/lc-badge/lc-badge.component';
 import { LcDropdownSectionComponent } from './shared/components/lc-dropdown-section/lc-dropdown-section.component';
 import { LcDropdownSectionContentComponent } from './shared/components/lc-dropdown-section/lc-dropdown-section-content/lc-dropdown-section-content.component';
+import { ShoppingCartComponent } from './user/shopping-cart/shopping-cart.component';
+import { LcCheckboxComponent } from './shared/components/lc-checkbox/lc-checkbox.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { LcDropdownSectionContentComponent } from './shared/components/lc-dropdo
     LcDropdownComponent,
     LcBadgeComponent,
     LcDropdownSectionComponent,
-    LcDropdownSectionContentComponent
+    LcDropdownSectionContentComponent,
+    ShoppingCartComponent,
+    LcCheckboxComponent
   ],
     imports: [
         BrowserModule,

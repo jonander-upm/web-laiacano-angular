@@ -1,0 +1,57 @@
+<div class="flex">
+  <div class="w-3/5 bg-basicDarker shadow-sectionDeeper">
+
+  </div>
+  <div class="w-2/5 mt-5">
+    <lc-dropdown-section
+      [title]="SHIPPING_ADDRESS_TITLE"
+      [showContent]="true"
+      [content]="address">
+    </lc-dropdown-section>
+    <lc-dropdown-section
+      [title]="BILLING_ADDRESS_TITLE"
+      [showContent]="true"
+      [content]="billingAddress">
+    </lc-dropdown-section>
+  </div>
+</div>
+
+<ng-template #address>
+  <div class="flex flex-col gap-3 m-3">
+    <span class="text-xl font-bold">Contact Information</span>
+    <div class="grid grid-cols-4 gap-5">
+      <lc-input class="w-full col-span-2" fieldSize="responsive" label="First Name"></lc-input>
+      <lc-input class="w-full col-span-2" fieldSize="responsive" label="Last Name"></lc-input>
+      <lc-input class="w-full col-span-2" fieldSize="responsive" label="Phone Number"></lc-input>
+    </div>
+  </div>
+  <div class="flex flex-col gap-3 m-3 my-5">
+    <span class="text-xl font-bold">Address</span>
+    <div class="grid grid-cols-4 gap-5">
+      <lc-input class="w-full col-span-2" fieldSize="responsive" label="Country"></lc-input>
+      <lc-input class="w-full col-span-2" fieldSize="responsive" label="State"></lc-input>
+      <lc-input class="w-full col-span-3" fieldSize="responsive" label="City"></lc-input>
+      <lc-input class="w-full col-span-1" fieldSize="responsive" label="Postcode"></lc-input>
+      <lc-input class="w-full col-span-4" fieldSize="responsive" label="Address Line 1"></lc-input>
+      <lc-input class="w-full col-span-4"
+                fieldSize="responsive"
+                label="Address Line 2"
+                hintLabel="(Optional)"
+                [showHint]="true"
+      ></lc-input>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #billingAddress>
+  <div class="m-3 my-5">
+    <lc-checkbox text="Same as delivery address"
+                 [checked]="copyBillingAddress"
+                 (toggleEvent)="toggleCopyBillingAddress($event)"
+    ></lc-checkbox>
+  </div>
+  <ng-container *ngIf="!copyBillingAddress">
+    <ng-container *ngTemplateOutlet="address">
+    </ng-container>
+  </ng-container>
+</ng-template>

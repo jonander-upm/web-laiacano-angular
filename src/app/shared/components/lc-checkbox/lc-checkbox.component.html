@@ -1,0 +1,10 @@
+<div class="flex items-center gap-2 cursor-pointer"
+     (click)="toggleCheckbox()"
+>
+  <input class="h-6 w-6 appearance-none border-2 border-main rounded-md accent-main
+    checked:content-checkOutline cursor-pointer"
+         type="checkbox"
+         [checked]="checked"
+  />
+  <span class="text-lg font-bold leading-none"> {{text}} </span>
+</div>
