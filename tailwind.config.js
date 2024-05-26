@@ -24,11 +24,15 @@ module.exports = {
       },
       boxShadow: {
         toolbarBottom: 'rgba(0, 0, 0, 0.1) 0px 11px 11px 0px',
-        sectionTopBottom: 'inset rgba(0, 0, 0, 0.07) 0px -6px 11px 0px, inset rgba(0, 0, 0, 0.07) 0px 6px 11px 0px',
+        sectionTopBottom: 'inset rgba(0, 0, 0, 0.07) -10px -6px 11px 0px, inset rgba(0, 0, 0, 0.07) 0px 6px 11px 0px',
+        sectionDeeper: 'inset rgba(0, 0, 0, 0.15) 0px -3px 15px 5px'
       },
       transitionProperty: {
         height: 'height',
       },
+      content: {
+        checkOutline: 'url("/assets/icons/check_outline.svg")',
+      }
     },
   },
   important: true,

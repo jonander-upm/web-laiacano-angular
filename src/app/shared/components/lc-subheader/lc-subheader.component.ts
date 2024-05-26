@@ -24,8 +24,3 @@ export class LcSubheaderComponent implements OnInit {
   }
 }
 
-export interface LcSubheaderData {
-  title: string;
-  hasFilters: boolean;
-}
-

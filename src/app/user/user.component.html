@@ -1,27 +1,30 @@
 <div>
   <lc-header></lc-header>
   <lc-subheader
-    *ngIf="subheaderData"
-    [title]="subheaderData.title"
-    [hasFilters]="subheaderData.hasFilters"
+    *ngIf="pageData"
+    [title]="pageData.title"
+    [hasFilters]="pageData.hasFilters"
     (toggleFilterEvent)="toggleFilters($event)"
   ></lc-subheader>
   <div
     class="h-content overflow-y-auto transition-height"
     [ngClass]="{
-    'h-contentSmall': subheaderData && !showFilters,
-    'h-contentXSmall': subheaderData && showFilters
+    'h-contentSmall': pageData && !showFilters,
+    'h-contentXSmall': pageData && showFilters
   }"
   >
     <main class="relative">
       <router-outlet></router-outlet>
       <lc-floating-button
-        *ngIf="shoppingCartItemNumber$ | async"
+        @fade
+        *ngIf="pageData
+          && pageData.showCart
+          && shoppingCartItemNumber$ | async"
         class="flex sticky bottom-10 z-20 w-max mr-10 mt-5 ml-auto"
         icon="shopping_cart"
         size="big"
         [badgeValue]="shoppingCartItemNumber$  | async"
-        @fade
+        (btnClick)="goToShoppingCart()"
       ></lc-floating-button>
     </main>
     <footer>

@@ -6,6 +6,7 @@ import {
 } from "./shared/dialogs/reset-password-dialog/wrapper/reset-password-dialog-wrapper.component";
 import {ShopComponent} from "./user/shop/shop.component";
 import {Route} from "./shared/enums/route";
+import {ShoppingCartComponent} from "./user/shopping-cart/shopping-cart.component";
 
 const routes: Routes = [
   {
@@ -20,9 +21,21 @@ const routes: Routes = [
     path: Route.SHOP,
     component: ShopComponent,
     data: {
-      subheaderData: {
+      pageData: {
         title: 'Shop',
         hasFilters: true,
+        showCart: true,
+      } ,
+    },
+  },
+  {
+    path: Route.SHOPPING_CART,
+    component: ShoppingCartComponent,
+    data: {
+      pageData: {
+        title: 'Shopping Cart',
+        hasFilters: false,
+        showCart: false,
       } ,
     },
   },

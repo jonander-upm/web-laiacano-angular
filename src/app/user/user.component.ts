@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
-import {LcSubheaderData} from "../shared/components/lc-subheader/lc-subheader.component";
 import {filter, mergeMap, Observable, tap} from "rxjs";
 import {ShoppingCartService} from "../shared/services/shopping-cart.service";
 import {animate, style, transition, trigger} from "@angular/animations";
+import {Route} from "../shared/enums/route";
 
 @Component({
   selector: 'app-user',
@@ -23,7 +23,7 @@ import {animate, style, transition, trigger} from "@angular/animations";
 })
 export class UserComponent implements OnInit {
 
-  subheaderData?: LcSubheaderData;
+  pageData?: LcPageData;
   showFilters: boolean = false;
 
   readonly shoppingCartItemNumber$: Observable<number>;
@@ -44,11 +44,22 @@ export class UserComponent implements OnInit {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       mergeMap(() => this.activatedRoute.firstChild.data),
-      tap(data => this.subheaderData = data['subheaderData']),
+      tap(data => this.pageData = data['pageData']),
     ).subscribe();
   }
 
   toggleFilters(filtersShown: boolean): void {
     this.showFilters = filtersShown;
   }
+
+  goToShoppingCart(): void {
+    this.router.navigateByUrl(Route.SHOPPING_CART).then(r => {});
+  }
+
+}
+
+export interface LcPageData {
+  title: string;
+  hasFilters: boolean;
+  showCart: boolean;
 }
