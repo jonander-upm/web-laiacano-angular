@@ -1,4 +1,4 @@
-import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -20,22 +20,27 @@ import {
     }
   ]
 })
-export class LcInputComponent implements ControlValueAccessor{
+export class LcInputComponent implements OnInit, ControlValueAccessor{
   @Input() label!: string;
   @Input() content: string = '';
   @Input() password: boolean = false;
   @Input() formControlName: string = 'field';
   @Input() showHint? = false;
   @Input() hintLabel?: string;
-  @Input() fieldSize: 'small' | 'medium' | 'large' | 'responsive' = 'medium';
-  @Input() parentFormGroup: FormGroup = this.formBuilder.group({'field': new FormControl("")})
+  @Input() fieldSize: 'xsmall' | 'small' | 'medium' | 'large' | 'responsive' = 'medium';
+  @Input() parentFormGroup: FormGroup = this.formBuilder.group({'field': new FormControl(this.content)})
   @Input() disabled = false;
+  @Input() readonly = false
 
   @Output() contentChange = new EventEmitter<string>();
 
   viewPassword?: boolean = false;
 
   constructor(private readonly formBuilder: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.writeValue(this.content);
+  }
 
   writeValue(value: string): void {
     this.parentFormGroup?.controls[this.formControlName].setValue(value)

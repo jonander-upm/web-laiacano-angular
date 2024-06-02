@@ -1,0 +1,15 @@
+<div class="flex justify-between items-center gap-1">
+  <mat-icon class="h-full w-fit text-3xl"
+            [ngClass]="{
+              'cursor-pointer': amount > minAmount,
+              'text-hint cursor-default': amount <= minAmount
+            }"
+            (click)="removeItem()">do_not_disturb_on</mat-icon>
+    <lc-input [content]="stringAmount" [readonly]="true" fieldSize="xsmall"></lc-input>
+  <mat-icon class="h-full w-fit text-3xl"
+            [ngClass]="{
+              'cursor-pointer': !maxAmount || amount < maxAmount,
+              'text-hint': amount >= maxAmount
+            }"
+            (click)="addItem()">add_circle</mat-icon>
+</div>

@@ -11,6 +11,7 @@ module.exports = {
     },
     extend: {
       height: {
+        '54': '13.5rem',
         header: 'var(--header-height)',
         subheader: 'var(--subheader-height)',
         filter: 'var(--filter-height)',
@@ -25,10 +26,14 @@ module.exports = {
       boxShadow: {
         toolbarBottom: 'rgba(0, 0, 0, 0.1) 0px 11px 11px 0px',
         sectionTopBottom: 'inset rgba(0, 0, 0, 0.07) -10px -6px 11px 0px, inset rgba(0, 0, 0, 0.07) 0px 6px 11px 0px',
-        sectionDeeper: 'inset rgba(0, 0, 0, 0.15) 0px -3px 15px 5px'
+        sectionDeeper: 'inset rgba(0, 0, 0, 0.15) 0px -3px 15px 5px',
+      },
+      dropShadow: {
+        card: '0 0 0.4rem rgba(0, 0, 0, 0.15)',
       },
       transitionProperty: {
         height: 'height',
+        visibility: 'visibility'
       },
       content: {
         checkOutline: 'url("/assets/icons/check_outline.svg")',

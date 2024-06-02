@@ -56,6 +56,9 @@
       }
     }
     &.field {
+      &--xsmall {
+        width: 60px;
+      }
       &--small {
         width: 120px;
       }

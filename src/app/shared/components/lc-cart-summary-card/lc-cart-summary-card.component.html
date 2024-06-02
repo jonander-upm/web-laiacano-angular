@@ -1,0 +1,30 @@
+<div class="flex p-5 rounded-2xl bg-basic group">
+  <img *ngIf="product.imageSrc"
+       class="max-h-32 w-auto rounded-md border-4 border-main"
+       [src]="imageUrl"
+       [alt]="product.title" />
+  <div class="flex flex-col justify-between w-full px-5">
+    <div class="flex justify-between">
+      <div class="flex flex-col gap-1">
+        <div class="flex items-center gap-5">
+          <span class="text-2xl font-bold">{{ product.title }}</span>
+          <mat-icon class="h-fit w-fit text-3xl cursor-pointer invisible group-hover:visible transition-visibility"
+                    (click)="itemRemoved.emit(amount)"
+          >
+            delete_outline
+          </mat-icon>
+        </div>
+        <span class="text-lg">{{ product.format }}</span>
+      </div>
+      <lc-amount-selector [amount]="amount"
+                          [maxAmount]="product.stock"
+                          (itemRemoved)="itemRemoved.emit($event)"
+                          (itemAdded)="itemAdded.emit($event)"
+      ></lc-amount-selector>
+    </div>
+    <div class="flex justify-between items-baseline">
+      <span class="text-base leading-none align-baseline">Price: {{ product.price ?? '-'}}</span>
+      <span class="text-xl font-bold leading-none align-baseline">Total: {{ total ?? '-'}}</span>
+    </div>
+  </div>
+</div>

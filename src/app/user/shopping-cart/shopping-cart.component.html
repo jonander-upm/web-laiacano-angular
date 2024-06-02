@@ -1,6 +1,20 @@
-<div class="flex">
-  <div class="w-3/5 bg-basicDarker shadow-sectionDeeper">
-
+<div #shoppingCart class="flex h-fit">
+  <div class="flex flex-col w-3/5 min-h-full">
+    <div class="flex flex-col h-full gap-5 p-10 bg-basicDarker shadow-sectionDeeper">
+      <lc-cart-summary-card *ngFor="let item of shoppingCart$ | async"
+                            class="drop-shadow-card"
+                            [product]="item.product"
+                            [amount]="item.amount"
+                            total="{{ item.total }} {{ CURRENCY_SYMBOL }}"
+                            (itemRemoved)="removeFromCart($event, item)"
+                            (itemAdded)="addToCart($event, item)"
+      ></lc-cart-summary-card>
+    </div>
+    <div class="flex justify-between items-start h-54 p-10">
+      <span class="text-4xl font-bold">Total: {{ shoppingCartTotalPrice$ | async}} {{this.CURRENCY_SYMBOL}}</span>
+      <lc-button class="w-fit" text="Checkout" size="medium" color="primary" (clickEvent)="handleCheckout()">
+      </lc-button>
+    </div>
   </div>
   <div class="w-2/5 mt-5">
     <lc-dropdown-section
@@ -17,30 +31,90 @@
 </div>
 
 <ng-template #address>
-  <div class="flex flex-col gap-3 m-3">
-    <span class="text-xl font-bold">Contact Information</span>
-    <div class="grid grid-cols-4 gap-5">
-      <lc-input class="w-full col-span-2" fieldSize="responsive" label="First Name"></lc-input>
-      <lc-input class="w-full col-span-2" fieldSize="responsive" label="Last Name"></lc-input>
-      <lc-input class="w-full col-span-2" fieldSize="responsive" label="Phone Number"></lc-input>
+  <form [formGroup]="shippingAddressForm">
+    <div class="flex flex-col gap-3 m-3">
+      <span class="text-xl font-bold">Contact Information</span>
+      <div class="grid grid-cols-4 gap-5">
+        <lc-input class="w-full col-span-2"
+                  fieldSize="responsive"
+                  label="First Name"
+                  [parentFormGroup]="shippingAddressForm"
+                  formControlName="firstName"
+                  [showHint]="shippingAddressForm.dirty && shippingAddressForm.controls['firstName'].invalid"
+                  [hintLabel]="getErrorMessage('firstName', shippingAddressForm)"
+        ></lc-input>
+        <lc-input class="w-full col-span-2"
+                  fieldSize="responsive"
+                  label="Last Name"
+                  [parentFormGroup]="shippingAddressForm"
+                  formControlName="lastName"
+                  [showHint]="shippingAddressForm.dirty && shippingAddressForm.controls['lastName'].invalid"
+                  [hintLabel]="getErrorMessage('lastName', shippingAddressForm)"
+        ></lc-input>
+        <lc-input class="w-full col-span-2"
+                  fieldSize="responsive"
+                  label="Phone Number"
+                  [parentFormGroup]="shippingAddressForm"
+                  formControlName="phoneNumber"
+                  [showHint]="shippingAddressForm.dirty && shippingAddressForm.controls['phoneNumber'].invalid"
+                  [hintLabel]="getErrorMessage('phoneNumber', shippingAddressForm)"
+        ></lc-input>
+      </div>
     </div>
-  </div>
-  <div class="flex flex-col gap-3 m-3 my-5">
-    <span class="text-xl font-bold">Address</span>
-    <div class="grid grid-cols-4 gap-5">
-      <lc-input class="w-full col-span-2" fieldSize="responsive" label="Country"></lc-input>
-      <lc-input class="w-full col-span-2" fieldSize="responsive" label="State"></lc-input>
-      <lc-input class="w-full col-span-3" fieldSize="responsive" label="City"></lc-input>
-      <lc-input class="w-full col-span-1" fieldSize="responsive" label="Postcode"></lc-input>
-      <lc-input class="w-full col-span-4" fieldSize="responsive" label="Address Line 1"></lc-input>
-      <lc-input class="w-full col-span-4"
-                fieldSize="responsive"
-                label="Address Line 2"
-                hintLabel="(Optional)"
-                [showHint]="true"
-      ></lc-input>
+    <div class="flex flex-col gap-3 m-3 my-5">
+      <span class="text-xl font-bold">Address</span>
+      <div class="grid grid-cols-4 gap-5">
+        <lc-input class="w-full col-span-2"
+                  fieldSize="responsive"
+                  label="Country"
+                  [parentFormGroup]="shippingAddressForm"
+                  formControlName="country"
+                  [showHint]="shippingAddressForm.dirty && shippingAddressForm.controls['country'].invalid"
+                  [hintLabel]="getErrorMessage('country', shippingAddressForm)"
+        ></lc-input>
+        <lc-input class="w-full col-span-2"
+                  fieldSize="responsive"
+                  label="State"
+                  [parentFormGroup]="shippingAddressForm"
+                  formControlName="state"
+                  [showHint]="shippingAddressForm.dirty && shippingAddressForm.controls['state'].invalid"
+                  [hintLabel]="getErrorMessage('state', shippingAddressForm)"
+        ></lc-input>
+        <lc-input class="w-full col-span-3"
+                  fieldSize="responsive"
+                  label="City"
+                  [parentFormGroup]="shippingAddressForm"
+                  formControlName="city"
+                  [showHint]="shippingAddressForm.dirty && shippingAddressForm.controls['city'].invalid"
+                  [hintLabel]="getErrorMessage('city', shippingAddressForm)"
+        ></lc-input>
+        <lc-input class="w-full col-span-1"
+                  fieldSize="responsive"
+                  label="Postcode"
+                  [parentFormGroup]="shippingAddressForm"
+                  formControlName="postcode"
+                  [showHint]="shippingAddressForm.dirty && shippingAddressForm.controls['postcode'].invalid"
+                  [hintLabel]="getErrorMessage('postcode', shippingAddressForm)"
+        ></lc-input>
+        <lc-input class="w-full col-span-4"
+                  fieldSize="responsive"
+                  label="Address Line 1"
+                  [parentFormGroup]="shippingAddressForm"
+                  formControlName="addressLine"
+                  [showHint]="shippingAddressForm.dirty && shippingAddressForm.controls['addressLine'].invalid"
+                  [hintLabel]="getErrorMessage('addressLine', shippingAddressForm)"
+        ></lc-input>
+        <lc-input class="w-full col-span-4"
+                  fieldSize="responsive"
+                  label="Address Line 2"
+                  [parentFormGroup]="shippingAddressForm"
+                  formControlName="additionalAddressLine"
+                  [showHint]="true"
+                  [hintLabel]="getErrorMessage('additionalAddressLine', shippingAddressForm) ?? '(Optional)'"
+        ></lc-input>
+      </div>
     </div>
-  </div>
+  </form>
 </ng-template>
 
 <ng-template #billingAddress>
@@ -50,8 +124,90 @@
                  (toggleEvent)="toggleCopyBillingAddress($event)"
     ></lc-checkbox>
   </div>
-  <ng-container *ngIf="!copyBillingAddress">
-    <ng-container *ngTemplateOutlet="address">
-    </ng-container>
-  </ng-container>
+  <form *ngIf="!copyBillingAddress"
+        [formGroup]="billingAddressForm"
+  >
+    <div class="flex flex-col gap-3 m-3">
+      <span class="text-xl font-bold">Contact Information</span>
+      <div class="grid grid-cols-4 gap-5">
+        <lc-input class="w-full col-span-2"
+                  fieldSize="responsive"
+                  label="First Name"
+                  [parentFormGroup]="billingAddressForm"
+                  formControlName="firstName"
+                  [showHint]="billingAddressForm.dirty && billingAddressForm.controls['firstName'].invalid"
+                  [hintLabel]="getErrorMessage('firstName', billingAddressForm)"
+        ></lc-input>
+        <lc-input class="w-full col-span-2"
+                  fieldSize="responsive"
+                  label="Last Name"
+                  [parentFormGroup]="billingAddressForm"
+                  formControlName="lastName"
+                  [showHint]="billingAddressForm.dirty && billingAddressForm.controls['lastName'].invalid"
+                  [hintLabel]="getErrorMessage('lastName', billingAddressForm)"
+        ></lc-input>
+        <lc-input class="w-full col-span-2"
+                  fieldSize="responsive"
+                  label="Phone Number"
+                  [parentFormGroup]="billingAddressForm"
+                  formControlName="phoneNumber"
+                  [showHint]="billingAddressForm.dirty && billingAddressForm.controls['phoneNumber'].invalid"
+                  [hintLabel]="getErrorMessage('phoneNumber', billingAddressForm)"
+        ></lc-input>
+      </div>
+    </div>
+    <div class="flex flex-col gap-3 m-3 my-5">
+      <span class="text-xl font-bold">Address</span>
+      <div class="grid grid-cols-4 gap-5">
+        <lc-input class="w-full col-span-2"
+                  fieldSize="responsive"
+                  label="Country"
+                  [parentFormGroup]="billingAddressForm"
+                  formControlName="country"
+                  [showHint]="billingAddressForm.dirty && billingAddressForm.controls['country'].invalid"
+                  [hintLabel]="getErrorMessage('country', billingAddressForm)"
+        ></lc-input>
+        <lc-input class="w-full col-span-2"
+                  fieldSize="responsive"
+                  label="State"
+                  [parentFormGroup]="billingAddressForm"
+                  formControlName="state"
+                  [showHint]="billingAddressForm.dirty && billingAddressForm.controls['state'].invalid"
+                  [hintLabel]="getErrorMessage('state', billingAddressForm)"
+        ></lc-input>
+        <lc-input class="w-full col-span-3"
+                  fieldSize="responsive"
+                  label="City"
+                  [parentFormGroup]="billingAddressForm"
+                  formControlName="city"
+                  [showHint]="billingAddressForm.dirty && billingAddressForm.controls['city'].invalid"
+                  [hintLabel]="getErrorMessage('city', billingAddressForm)"
+        ></lc-input>
+        <lc-input class="w-full col-span-1"
+                  fieldSize="responsive"
+                  label="Postcode"
+                  [parentFormGroup]="billingAddressForm"
+                  formControlName="postcode"
+                  [showHint]="billingAddressForm.dirty && billingAddressForm.controls['postcode'].invalid"
+                  [hintLabel]="getErrorMessage('postcode', billingAddressForm)"
+        ></lc-input>
+        <lc-input class="w-full col-span-4"
+                  fieldSize="responsive"
+                  label="Address Line 1"
+                  [parentFormGroup]="billingAddressForm"
+                  formControlName="addressLine"
+                  [showHint]="billingAddressForm.dirty && billingAddressForm.controls['addressLine'].invalid"
+                  [hintLabel]="getErrorMessage('addressLine', billingAddressForm)"
+        ></lc-input>
+        <lc-input class="w-full col-span-4"
+                  fieldSize="responsive"
+                  label="Address Line 2"
+                  [parentFormGroup]="billingAddressForm"
+                  formControlName="additionalAddressLine"
+                  [showHint]="true"
+                  [hintLabel]="getErrorMessage('additionalAddressLine', billingAddressForm) ?? '(Optional)'"
+        ></lc-input>
+      </div>
+    </div>
+  </form>
 </ng-template>
