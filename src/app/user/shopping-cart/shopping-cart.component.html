@@ -12,7 +12,11 @@
     </div>
     <div class="flex justify-between items-start h-54 p-10">
       <span class="text-4xl font-bold">Total: {{ shoppingCartTotalPrice$ | async}} {{this.CURRENCY_SYMBOL}}</span>
-      <lc-button class="w-fit" text="Checkout" size="medium" color="primary" (clickEvent)="handleCheckout()">
+      <lc-button class="w-fit px-2"
+                 [text]="authenticated ? 'Checkout' : 'Log in to proceed'"
+                 [size]="authenticated ? 'medium' : 'large'"
+                 color="primary"
+                 (clickEvent)="handlePreCheckout()">
       </lc-button>
     </div>
   </div>

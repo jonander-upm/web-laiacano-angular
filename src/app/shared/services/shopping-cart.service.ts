@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, reduce, tap} from "rxjs";
 import {map} from "rxjs/operators";
-import {Product} from "./product.model";
 import {LcProductItem} from "../../user/shop/shop.component";
+import {LcOrderItem} from "./order.model";
 
 @Injectable({
   providedIn: 'root'
@@ -71,11 +71,4 @@ export class ShoppingCartService {
     this.shoppingCart = [];
     this.shoppingCart$.next(this.shoppingCart);
   }
-}
-
-// TODO: Move into order service
-export interface LcOrderItem {
-  product: LcProductItem;
-  amount: number;
-  total: number;
 }

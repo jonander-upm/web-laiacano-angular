@@ -5,6 +5,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {EMPTY, tap} from "rxjs";
 import {catchError} from "rxjs/operators";
+import {RegisterDialogComponent} from "../register-dialog/register-dialog.component";
 
 @Component({
   selector: 'app-login-dialog',
@@ -48,5 +49,13 @@ export class LoginDialogComponent {
           duration: 2000
         })
       );
+  }
+
+  register(): void {
+    this.dialog.open(RegisterDialogComponent, {
+      height: "fit-content",
+      width: "400px",
+      panelClass: "auth-dialog"
+    });
   }
 }

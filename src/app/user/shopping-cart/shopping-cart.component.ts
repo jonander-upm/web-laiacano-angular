@@ -1,9 +1,15 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {filter, Observable, Subject, takeUntil, tap} from "rxjs";
-import {LcOrderItem, ShoppingCartService} from "../../shared/services/shopping-cart.service";
+import {filter, mergeMap, Observable, Subject, takeUntil, tap} from "rxjs";
+import {ShoppingCartService} from "../../shared/services/shopping-cart.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {Route} from "../../shared/enums/route";
+import {AuthService} from "../../core/authentication.service";
+import {MatDialog} from "@angular/material/dialog";
+import {LoginDialogComponent} from "../../shared/dialogs/login-dialog/login-dialog.component";
+import {Address, LcOrderItem, Order, OrderItem} from "../../shared/services/order.model";
+import {OrderService} from "../../shared/services/order.service";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'lc-shopping-cart',
@@ -51,9 +57,16 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private readonly router: Router,
+  get authenticated(): boolean {
+    return this.auth.isAuthenticated();
+  }
+
+  constructor(private readonly auth: AuthService,
+              private readonly router: Router,
+              private readonly dialog: MatDialog,
               private readonly fb: FormBuilder,
-              private readonly shoppingCartService: ShoppingCartService) {
+              private readonly shoppingCartService: ShoppingCartService,
+              private readonly orderService: OrderService) {
     this.shoppingCart$ = this.shoppingCartService.getShoppingCart();
     this.shoppingCartTotalPrice$ = this.shoppingCartService.getShoppingCartTotalPrice();
   }
@@ -78,14 +91,72 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     this.shoppingCartService.addProductToCart(item.product, amount);
   }
 
-  handleCheckout() {
+  handlePreCheckout() {
+    if(!this.authenticated) {
+      this.dialog.open(LoginDialogComponent, {
+        height: "fit-content",
+        width: "400px",
+        panelClass: "auth-dialog"
+      }).afterClosed().pipe(
+        filter(() => this.authenticated),
+        tap(() => this.validateAddressForm())
+      ).subscribe()
+    } else {
+      this.validateAddressForm()
+    }
+  }
+
+  private validateAddressForm() {
     if(this.shippingAddressForm.invalid || (!this.copyBillingAddress && this.billingAddressForm.invalid)) {
       this.shippingAddressForm.markAsDirty();
       this.billingAddressForm.markAsDirty();
       return;
     }
 
-    // TODO Handle order creation
+    this.checkout();
+  }
+
+  checkout() {
+    // TODO Implement payment gateway
+    this.createOrder()
+  }
+
+  private createOrder(): void {
+    const shippingAddress = this.mapAddress(this.shippingAddressForm);
+    const billingAddress = this.copyBillingAddress
+      ? shippingAddress
+      : this.mapAddress(this.billingAddressForm);
+    this.shoppingCart$.pipe(
+      map(orderItems => this.mapOrderItems(orderItems)),
+      map(orderItems => ({
+        shippingAddress,
+        billingAddress,
+        orderItems
+      })),
+      mergeMap(order => this.orderService.createOrder(order)),
+    ).subscribe();
+  }
+
+  private mapAddress(form: FormGroup): Address {
+    const formControls = this.shippingAddressForm.controls;
+    return {
+      firstName: formControls['firstName'].value,
+      lastName: formControls['lastName'].value,
+      phoneNumber: formControls['phoneNumber'].value,
+      country: formControls['country'].value,
+      state: formControls['state'].value,
+      city: formControls['city'].value,
+      postcode: formControls['postcode'].value,
+      addressLine: formControls['addressLine'].value,
+      additionalAddressLine: formControls['additionalAddressLine'].value,
+    };
+  }
+
+  private mapOrderItems(orderItems: LcOrderItem[]): OrderItem[] {
+    return orderItems.map(orderItem => ({
+      productId: orderItem.product.id,
+      amount: orderItem.amount
+    }));
   }
 
   getErrorMessage(formControlName: string, form: FormGroup): string | undefined {
