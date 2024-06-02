@@ -36,6 +36,8 @@ import { LcDropdownSectionComponent } from './shared/components/lc-dropdown-sect
 import { LcDropdownSectionContentComponent } from './shared/components/lc-dropdown-section/lc-dropdown-section-content/lc-dropdown-section-content.component';
 import { ShoppingCartComponent } from './user/shopping-cart/shopping-cart.component';
 import { LcCheckboxComponent } from './shared/components/lc-checkbox/lc-checkbox.component';
+import { LcCartSummaryCardComponent } from './shared/components/lc-cart-summary-card/lc-cart-summary-card.component';
+import { LcAmountSelectorComponent } from './shared/components/lc-amount-selector/lc-amount-selector.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { LcCheckboxComponent } from './shared/components/lc-checkbox/lc-checkbox
     LcDropdownSectionComponent,
     LcDropdownSectionContentComponent,
     ShoppingCartComponent,
-    LcCheckboxComponent
+    LcCheckboxComponent,
+    LcCartSummaryCardComponent,
+    LcAmountSelectorComponent
   ],
     imports: [
         BrowserModule,
