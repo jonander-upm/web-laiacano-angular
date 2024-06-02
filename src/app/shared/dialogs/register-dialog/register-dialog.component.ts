@@ -43,9 +43,14 @@ export class RegisterDialogComponent implements OnInit {
     let config = new MatSnackBarConfig();
     config.duration = 2000;
     this.auth.register({username: this.username, email: this.email, password: this.password}).subscribe(
-      () => {
+      user => {
         this.snackBar.open("User " + this.username + " created successfully!", undefined, config);
-        this.dialog.closeAll();
+        this.auth.login({
+          username: this.username,
+          password: this.password
+        }).subscribe(() => {
+          this.dialog.closeAll();
+        });
       }
     );
   }
