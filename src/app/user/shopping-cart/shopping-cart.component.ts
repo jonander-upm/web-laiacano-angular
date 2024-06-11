@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {filter, mergeMap, Observable, Subject, takeUntil, tap} from "rxjs";
+import {filter, mergeMap, Observable, Subject, take, takeUntil, tap} from "rxjs";
 import {ShoppingCartService} from "../../shared/services/shopping-cart.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
@@ -7,7 +7,7 @@ import {Route} from "../../shared/enums/route";
 import {AuthService} from "../../core/authentication.service";
 import {MatDialog} from "@angular/material/dialog";
 import {LoginDialogComponent} from "../../shared/dialogs/login-dialog/login-dialog.component";
-import {Address, LcOrderItem, Order, OrderItem} from "../../shared/services/order.model";
+import {Address, LcOrderItem, OrderItem} from "../../shared/services/order.model";
 import {OrderService} from "../../shared/services/order.service";
 import {map} from "rxjs/operators";
 
@@ -21,6 +21,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   readonly SHIPPING_ADDRESS_TITLE: string = 'Shipping Address';
   readonly BILLING_ADDRESS_TITLE: string = 'Billing Address';
   readonly CURRENCY_SYMBOL = '$';
+  readonly ORDER_SUMMARY_ROUTE: string = '/order'
 
   readonly shoppingCart$: Observable<LcOrderItem[]>;
   readonly shoppingCartTotalPrice$: Observable<number>;
@@ -127,6 +128,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
       ? shippingAddress
       : this.mapAddress(this.billingAddressForm);
     this.shoppingCart$.pipe(
+      take(1),
       map(orderItems => this.mapOrderItems(orderItems)),
       map(orderItems => ({
         shippingAddress,
@@ -134,6 +136,10 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
         orderItems
       })),
       mergeMap(order => this.orderService.createOrder(order)),
+      tap(orderId => {
+        this.shoppingCartService.emptyShoppingCart()
+        return this.router.navigate([this.ORDER_SUMMARY_ROUTE, orderId]);
+      }),
     ).subscribe();
   }
 

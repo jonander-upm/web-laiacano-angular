@@ -22,7 +22,13 @@ export class AuthService {
   static RESET_PASSWORD_ENDPOINT = environment.REST_API + "/auth/reset-password";
   private user: User;
 
+  static TOKEN_STORAGE_KEY = 'lc-token';
+
   constructor(private httpService: HttpService, private router: Router) {
+    const storedToken = localStorage.getItem(AuthService.TOKEN_STORAGE_KEY);
+    if (storedToken) {
+      this.user = this.mapUser({token: storedToken});
+    }
   }
 
   register(register: Register): Observable<User> {
@@ -35,14 +41,19 @@ export class AuthService {
       .post(AuthService.LOGIN_END_POINT, login)
       .pipe(
         map(jsonToken => {
-          const jwtHelper = new JwtHelperService();
-          this.user = jsonToken;
-          this.user.username = jwtHelper.decodeToken(jsonToken.token).username;
-          this.user.email = jwtHelper.decodeToken(jsonToken.token).email;
-          this.user.role = jwtHelper.decodeToken(jsonToken.token).role;
-          return this.user;
+          localStorage.setItem(AuthService.TOKEN_STORAGE_KEY, jsonToken.token);
+          return this.mapUser(jsonToken);
         })
       );
+  }
+
+  private mapUser(token: any): User {
+    const jwtHelper = new JwtHelperService();
+    this.user = token;
+    this.user.username = jwtHelper.decodeToken(token.token).username;
+    this.user.email = jwtHelper.decodeToken(token.token).email;
+    this.user.role = jwtHelper.decodeToken(token.token).role;
+    return this.user;
   }
 
   forgotPassword(username: string): Observable<void> {
@@ -58,6 +69,7 @@ export class AuthService {
 
   logout(): void {
     this.user = undefined;
+    localStorage.removeItem(AuthService.TOKEN_STORAGE_KEY);
     this.router.navigate([""]).then();
   }
 

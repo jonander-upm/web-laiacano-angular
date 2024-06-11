@@ -8,10 +8,22 @@ import {LcOrderItem} from "./order.model";
   providedIn: 'root'
 })
 export class ShoppingCartService {
-  shoppingCart: LcOrderItem[] = [];
-  private readonly shoppingCart$: BehaviorSubject<LcOrderItem[]> = new BehaviorSubject<LcOrderItem[]>(this.shoppingCart);
+  shoppingCart: LcOrderItem[];
+  private shoppingCart$: BehaviorSubject<LcOrderItem[]>;
+  private readonly CART_STORAGE_KEY = 'lc-cart';
+  constructor() {
+    this.initShoppingCart();
+  }
 
-  constructor() { }
+  private initShoppingCart(): void {
+    this.shoppingCart = JSON.parse(localStorage.getItem(this.CART_STORAGE_KEY) ?? '[]');
+    this.shoppingCart$ = new BehaviorSubject<LcOrderItem[]>(this.shoppingCart);
+    this.getShoppingCart().pipe(
+      tap(shoppingCart =>
+        localStorage.setItem(this.CART_STORAGE_KEY, JSON.stringify(shoppingCart)),
+      ),
+    ).subscribe();
+  }
 
   getShoppingCart(): Observable<LcOrderItem[]> {
     return this.shoppingCart$.asObservable();

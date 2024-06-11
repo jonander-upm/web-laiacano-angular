@@ -6,6 +6,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class LcSubheaderComponent implements OnInit {
   @Input() title: string = '';
+  @Input() id?: string;
   @Input() hasFilters?: boolean;
 
   @Output() toggleFilterEvent: EventEmitter<boolean> = new EventEmitter<boolean>();

@@ -1,9 +1,12 @@
 import {LcProductItem} from "../../user/shop/shop.component";
 
 export interface Order {
+  id?: string;
   shippingAddress: Address;
   billingAddress: Address;
   orderItems: OrderItem[];
+  status?: string;
+  price?: string;
 }
 
 export interface Address {

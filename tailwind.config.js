@@ -19,6 +19,11 @@ module.exports = {
         content: 'var(--content-height-base)',
         contentSmall: 'var(--content-height-sm)',
         contentXSmall: 'var(--content-height-xs)',
+        orderFooter: 'var(--order-content-height)',
+        orderContent: 'var(--order-footer-height)',
+      },
+      minHeight: {
+        orderContent: 'var(--order-footer-height)',
       },
       padding: {
         page: '70px',

@@ -25,6 +25,7 @@ export class UserComponent implements OnInit {
 
   pageData?: LcPageData;
   showFilters: boolean = false;
+  id?: string;
 
   readonly shoppingCartItemNumber$: Observable<number>;
 
@@ -44,7 +45,14 @@ export class UserComponent implements OnInit {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       mergeMap(() => this.activatedRoute.firstChild.data),
-      tap(data => this.pageData = data['pageData']),
+      tap(data => {
+        this.pageData = data['pageData'];
+        if(this.pageData?.hasId) {
+          this.id = this.activatedRoute.firstChild.snapshot.paramMap.get('id');
+        } else {
+          this.id = undefined;
+        }
+      }),
     ).subscribe();
   }
 
@@ -62,4 +70,5 @@ export interface LcPageData {
   title: string;
   hasFilters: boolean;
   showCart: boolean;
+  hasId: boolean;
 }
