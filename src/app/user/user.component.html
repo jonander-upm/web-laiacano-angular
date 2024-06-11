@@ -3,6 +3,7 @@
   <lc-subheader
     *ngIf="pageData"
     [title]="pageData.title"
+    [id]="id"
     [hasFilters]="pageData.hasFilters"
     (toggleFilterEvent)="toggleFilters($event)"
   ></lc-subheader>

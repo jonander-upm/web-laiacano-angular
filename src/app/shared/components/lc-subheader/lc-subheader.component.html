@@ -3,7 +3,7 @@
   [ngClass]="{ 'h-subheaderFilters': showFilters }"
 >
   <div class="flex justify-between items-end">
-    <span class="text-6xl">{{ title }}</span>
+    <span class="text-6xl">{{ title }} <span *ngIf="id" class="text-4xl"> #{{id}}</span> </span>
     <lc-button
       *ngIf="hasFilters"
       class="h-fit w-fit"

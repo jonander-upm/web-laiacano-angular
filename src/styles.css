@@ -18,6 +18,9 @@
   --content-height-base: calc(100vh - var(--header-height));
   --content-height-sm: calc(100vh - var(--header-height) - var(--subheader-height));
   --content-height-xs: calc(100vh - var(--header-height) - var(--subheader-filter-height));
+
+  --order-content-height: 80px;
+  --order-footer-height: calc(65vh - var(--order-content-height));
 }
 
 @font-face {

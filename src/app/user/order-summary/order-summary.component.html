@@ -1,0 +1,175 @@
+<div *ngIf="order$ | async as order" class="flex h-fit">
+  <div class="flex flex-col w-3/5 min-h-full">
+    <div class="flex flex-col h-fit min-h-orderContent gap-5 p-10 bg-basicDarker shadow-sectionDeeper">
+      <lc-cart-summary-card *ngFor="let item of orderItems$ | async"
+                            class="drop-shadow-card"
+                            [product]="item.product"
+                            [amount]="item.amount"
+                            [readonly]="true"
+                            total="{{ item.total }} {{ CURRENCY_SYMBOL }}"
+      ></lc-cart-summary-card>
+    </div>
+    <div class="flex justify-between items-start h-24 p-10">
+      <span class="text-4xl font-bold">Status:
+        <span class="text-2xl font-medium">{{ order.status }}</span>
+      </span>
+      <span class="text-4xl font-bold">Total: {{ order.price }} {{this.CURRENCY_SYMBOL}}</span>
+    </div>
+  </div>
+  <div class="w-2/5 mt-5">
+    <lc-dropdown-section
+      [title]="SHIPPING_ADDRESS_TITLE"
+      [showContent]="true"
+      [content]="address">
+    </lc-dropdown-section>
+    <lc-dropdown-section
+      [title]="BILLING_ADDRESS_TITLE"
+      [showContent]="true"
+      [content]="billingAddress">
+    </lc-dropdown-section>
+  </div>
+</div>
+
+<ng-template #orderStatus>
+  <ng-container *ngIf="order$ | async as order">
+    <span>{{order.status}}</span>
+  </ng-container>
+</ng-template>
+
+<ng-template #address>
+  <ng-container *ngIf="order$ | async as order">
+    <div class="flex flex-col gap-3 m-3">
+      <span class="text-xl font-bold">Contact Information</span>
+      <div class="grid grid-cols-4 gap-5">
+        <lc-input class="w-full col-span-2"
+                  fieldSize="responsive"
+                  label="First Name"
+                  [content]="order.shippingAddress?.firstName"
+                  [readonly]="true"
+        ></lc-input>
+        <lc-input class="w-full col-span-2"
+                  fieldSize="responsive"
+                  label="Last Name"
+                  [content]="order.shippingAddress?.lastName"
+                  [readonly]="true"
+        ></lc-input>
+        <lc-input class="w-full col-span-2"
+                  fieldSize="responsive"
+                  label="Phone Number"
+                  [content]="order.shippingAddress?.phoneNumber"
+                  [readonly]="true"
+        ></lc-input>
+      </div>
+    </div>
+    <div class="flex flex-col gap-3 m-3 my-5">
+      <span class="text-xl font-bold">Address</span>
+      <div class="grid grid-cols-4 gap-5">
+        <lc-input class="w-full col-span-2"
+                  fieldSize="responsive"
+                  label="Country"
+                  [content]="order.shippingAddress?.country"
+                  [readonly]="true"
+        ></lc-input>
+        <lc-input class="w-full col-span-2"
+                  fieldSize="responsive"
+                  label="State"
+                  [content]="order.shippingAddress?.state"
+                  [readonly]="true"
+        ></lc-input>
+        <lc-input class="w-full col-span-3"
+                  fieldSize="responsive"
+                  label="City"
+                  [content]="order.shippingAddress?.city"
+                  [readonly]="true"
+        ></lc-input>
+        <lc-input class="w-full col-span-1"
+                  fieldSize="responsive"
+                  label="Postcode"
+                  [content]="order.shippingAddress?.postcode"
+                  [readonly]="true"
+        ></lc-input>
+        <lc-input class="w-full col-span-4"
+                  fieldSize="responsive"
+                  label="Address Line 1"
+                  [content]="order.shippingAddress?.addressLine"
+                  [readonly]="true"
+        ></lc-input>
+        <lc-input class="w-full col-span-4"
+                  fieldSize="responsive"
+                  label="Address Line 2"
+                  [content]="order.shippingAddress?.additionalAddressLine"
+                  [readonly]="true"
+        ></lc-input>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #billingAddress>
+  <ng-container *ngIf="order$ | async as order">
+    <div class="flex flex-col gap-3 m-3">
+      <span class="text-xl font-bold">Contact Information</span>
+      <div class="grid grid-cols-4 gap-5">
+        <lc-input class="w-full col-span-2"
+                  fieldSize="responsive"
+                  label="First Name"
+                  [content]="order.billingAddress?.firstName"
+                  [readonly]="true"
+        ></lc-input>
+        <lc-input class="w-full col-span-2"
+                  fieldSize="responsive"
+                  label="Last Name"
+                  [content]="order.billingAddress?.lastName"
+                  [readonly]="true"
+        ></lc-input>
+        <lc-input class="w-full col-span-2"
+                  fieldSize="responsive"
+                  label="Phone Number"
+                  [content]="order.billingAddress?.phoneNumber"
+                  [readonly]="true"
+        ></lc-input>
+      </div>
+    </div>
+    <div class="flex flex-col gap-3 m-3 my-5">
+      <span class="text-xl font-bold">Address</span>
+      <div class="grid grid-cols-4 gap-5">
+        <lc-input class="w-full col-span-2"
+                  fieldSize="responsive"
+                  label="Country"
+                  [content]="order.billingAddress?.country"
+                  [readonly]="true"
+        ></lc-input>
+        <lc-input class="w-full col-span-2"
+                  fieldSize="responsive"
+                  label="State"
+                  [content]="order.billingAddress?.state"
+                  [readonly]="true"
+        ></lc-input>
+        <lc-input class="w-full col-span-3"
+                  fieldSize="responsive"
+                  label="City"
+                  [content]="order.billingAddress?.city"
+                  [readonly]="true"
+        ></lc-input>
+        <lc-input class="w-full col-span-1"
+                  fieldSize="responsive"
+                  label="Postcode"
+                  [content]="order.billingAddress?.postcode"
+                  [readonly]="true"
+        ></lc-input>
+        <lc-input class="w-full col-span-4"
+                  fieldSize="responsive"
+                  label="Address Line 1"
+                  [content]="order.billingAddress?.addressLine"
+                  [readonly]="true"
+        ></lc-input>
+        <lc-input class="w-full col-span-4"
+                  fieldSize="responsive"
+                  label="Address Line 2"
+                  [content]="order.billingAddress?.additionalAddressLine"
+                  [readonly]="true"
+        ></lc-input>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

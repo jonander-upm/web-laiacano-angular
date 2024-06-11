@@ -18,4 +18,9 @@ export class ProductService {
       .param('format', format)
       .get(this.PRODUCT_ENDPOINT);
   }
+
+  getProduct(id: string): Observable<Product> {
+    return this.httpService
+      .get(`${this.PRODUCT_ENDPOINT}/${id}`);
+  }
 }

@@ -10,6 +10,7 @@ export class LcCartSummaryCardComponent implements OnInit {
   @Input() product: LcProductItem;
   @Input() amount?: number;
   @Input() total?: string;
+  @Input() readonly?: boolean;
 
   @Output() itemRemoved: EventEmitter<number> = new EventEmitter<number>();
   @Output() itemAdded= new EventEmitter<number>();
