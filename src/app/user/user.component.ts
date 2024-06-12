@@ -4,6 +4,7 @@ import {filter, mergeMap, Observable, tap} from "rxjs";
 import {ShoppingCartService} from "../shared/services/shopping-cart.service";
 import {animate, style, transition, trigger} from "@angular/animations";
 import {Route} from "../shared/enums/route";
+import {LcFilterType} from "../shared/services/filter.model";
 
 @Component({
   selector: 'app-user',
@@ -68,7 +69,7 @@ export class UserComponent implements OnInit {
 
 export interface LcPageData {
   title: string;
-  hasFilters: boolean;
+  filters: LcFilterType[];
   showCart: boolean;
   hasId: boolean;
 }

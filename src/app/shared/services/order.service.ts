@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../../environments/environment";
-import {Order} from "./order.model";
+import {Order, Status} from "./order.model";
 import {HttpService} from "../../core/http.service";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
@@ -11,6 +11,12 @@ import {map} from "rxjs/operators";
 export class OrderService {
   private readonly ORDER_ENDPOINT = environment.REST_API + '/orders';
   constructor(private readonly httpService: HttpService) { }
+
+  getOrders(status: string): Observable<Order[]> {
+    return this.httpService
+      .param('status', status)
+      .get(`${this.ORDER_ENDPOINT}`);
+  }
 
   getOrder(id: string): Observable<Order> {
     return this.httpService

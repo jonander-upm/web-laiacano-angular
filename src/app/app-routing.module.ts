@@ -8,6 +8,7 @@ import {ShopComponent} from "./user/shop/shop.component";
 import {Route} from "./shared/enums/route";
 import {ShoppingCartComponent} from "./user/shopping-cart/shopping-cart.component";
 import {OrderSummaryComponent} from "./user/order-summary/order-summary.component";
+import {OrdersComponent} from "./user/orders/orders.component";
 
 const routes: Routes = [
   {
@@ -24,7 +25,7 @@ const routes: Routes = [
     data: {
       pageData: {
         title: 'Shop',
-        hasFilters: true,
+        filters: ['title', 'format'],
         showCart: true,
         hasId: false,
       } ,
@@ -36,11 +37,23 @@ const routes: Routes = [
     data: {
       pageData: {
         title: 'Shopping Cart',
-        hasFilters: false,
+        filters: [],
         showCart: false,
         hasId: false,
       } ,
     },
+  },
+  {
+    path: Route.ORDERS,
+    component: OrdersComponent,
+    data: {
+      pageData: {
+        title: 'Orders',
+        filters: ['status'],
+        showCart: true,
+        hasId: false,
+      }
+    }
   },
   {
     path: Route.ORDER_SUMMARY,
@@ -48,11 +61,11 @@ const routes: Routes = [
     data: {
       pageData: {
         title: 'Order',
-        hasFilters: false,
-        showCart: false,
+        filters: [],
+        showCart: true,
         hasId: true,
       }
-    }
+    },
   },
 ];
 
