@@ -13,7 +13,7 @@
       <li><lc-link-button text="Register" size="responsive" (btnClick)="register()"></lc-link-button></li>
     </ul>
     <ul *ngIf="isAuthenticated()">
-      <li class="user-message"><span>Hi, {{username}}!</span></li>
+      <li><lc-link-button text="My Orders" size="responsive" [hrefLink]="Route.ORDERS"></lc-link-button></li>
       <li><lc-link-button text="Logout" size="responsive" (btnClick)="logout()"></lc-link-button></li>
     </ul>
   </nav>

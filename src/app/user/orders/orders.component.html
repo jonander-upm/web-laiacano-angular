@@ -1,0 +1,15 @@
+<div class="flex flex-col gap-5 h-full min-h-96 m-10 p-10 rounded-md bg-basicDarker shadow-sectionDeeper">
+  <span *ngIf="!(orderList | async).length">
+    Nothing to be shown here, go buy something!
+  </span>
+  <lc-order-summary-card
+    *ngFor="let order of orderList | async"
+    class="h-36"
+    [order]="order"
+    (btnClicked)="goToSummary($event)"
+  >
+  </lc-order-summary-card>
+</div>
+
+
+

@@ -1,15 +1,25 @@
 <div class="flex justify-end items-end gap-6 h-filter">
   <lc-input
+    *ngIf="showFilters.includes('title')"
     class="h-fit w-fit"
     label="Item name"
     fieldSize="large"
     (contentChange)="applyFilters('title', $event)"
   ></lc-input>
   <lc-dropdown
+    *ngIf="showFilters.includes('format')"
     class="h-fit w-fit"
     label="Format"
     fieldSize="medium"
     [options]="formatOptions"
     (optionSelected)="applyFilters('format', $event)"
+  ></lc-dropdown>
+  <lc-dropdown
+    *ngIf="showFilters.includes('status')"
+    class="h-fit w-fit"
+    label="Status"
+    fieldSize="medium"
+    [options]="statusOptions"
+    (optionSelected)="applyFilters('status', $event)"
   ></lc-dropdown>
 </div>

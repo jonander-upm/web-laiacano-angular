@@ -1,32 +1,34 @@
-<div *ngIf="order$ | async as order" class="flex h-fit">
-  <div class="flex flex-col w-3/5 min-h-full">
-    <div class="flex flex-col h-fit min-h-orderContent gap-5 p-10 bg-basicDarker shadow-sectionDeeper">
-      <lc-cart-summary-card *ngFor="let item of orderItems$ | async"
-                            class="drop-shadow-card"
-                            [product]="item.product"
-                            [amount]="item.amount"
-                            [readonly]="true"
-                            total="{{ item.total }} {{ CURRENCY_SYMBOL }}"
-      ></lc-cart-summary-card>
+<div *ngIf="order$ | async as order" class="flex flex-col h-fit">
+  <div class="flex">
+    <div class="flex flex-col w-3/5 min-h-full">
+      <div class="flex flex-col h-full min-h-orderContent gap-5 p-10 bg-basicDarker shadow-sectionDeeper">
+        <lc-cart-summary-card *ngFor="let item of orderItems$ | async"
+                              class="drop-shadow-card"
+                              [product]="item.product"
+                              [amount]="item.amount"
+                              [readonly]="true"
+                              total="{{ item.total }} {{ CURRENCY_SYMBOL }}"
+        ></lc-cart-summary-card>
+      </div>
     </div>
-    <div class="flex justify-between items-start h-24 p-10">
+    <div class="w-2/5 mt-5">
+      <lc-dropdown-section
+        [title]="SHIPPING_ADDRESS_TITLE"
+        [showContent]="true"
+        [content]="address">
+      </lc-dropdown-section>
+      <lc-dropdown-section
+        [title]="BILLING_ADDRESS_TITLE"
+        [showContent]="false"
+        [content]="billingAddress">
+      </lc-dropdown-section>
+    </div>
+  </div>
+  <div class="flex justify-between items-start h-54 p-10">
       <span class="text-4xl font-bold">Status:
         <span class="text-2xl font-medium">{{ order.status }}</span>
       </span>
-      <span class="text-4xl font-bold">Total: {{ order.price }} {{this.CURRENCY_SYMBOL}}</span>
-    </div>
-  </div>
-  <div class="w-2/5 mt-5">
-    <lc-dropdown-section
-      [title]="SHIPPING_ADDRESS_TITLE"
-      [showContent]="true"
-      [content]="address">
-    </lc-dropdown-section>
-    <lc-dropdown-section
-      [title]="BILLING_ADDRESS_TITLE"
-      [showContent]="true"
-      [content]="billingAddress">
-    </lc-dropdown-section>
+    <span class="text-4xl font-bold">Total: {{ order.price }} {{this.CURRENCY_SYMBOL}}</span>
   </div>
 </div>
 

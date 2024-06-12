@@ -1,36 +1,38 @@
-<div #shoppingCart class="flex h-fit">
-  <div class="flex flex-col w-3/5 min-h-full">
-    <div class="flex flex-col h-full gap-5 p-10 bg-basicDarker shadow-sectionDeeper">
-      <lc-cart-summary-card *ngFor="let item of shoppingCart$ | async"
-                            class="drop-shadow-card"
-                            [product]="item.product"
-                            [amount]="item.amount"
-                            total="{{ item.total }} {{ CURRENCY_SYMBOL }}"
-                            (itemRemoved)="removeFromCart($event, item)"
-                            (itemAdded)="addToCart($event, item)"
-      ></lc-cart-summary-card>
+<div #shoppingCart class="flex flex-col h-fit">
+  <div class="flex">
+    <div class="flex flex-col w-3/5 min-h-full">
+      <div class="flex flex-col h-full gap-5 p-10 bg-basicDarker shadow-sectionDeeper">
+        <lc-cart-summary-card *ngFor="let item of shoppingCart$ | async"
+                              class="drop-shadow-card"
+                              [product]="item.product"
+                              [amount]="item.amount"
+                              total="{{ item.total }} {{ CURRENCY_SYMBOL }}"
+                              (itemRemoved)="removeFromCart($event, item)"
+                              (itemAdded)="addToCart($event, item)"
+        ></lc-cart-summary-card>
+      </div>
     </div>
-    <div class="flex justify-between items-start h-54 p-10">
-      <span class="text-4xl font-bold">Total: {{ shoppingCartTotalPrice$ | async}} {{this.CURRENCY_SYMBOL}}</span>
-      <lc-button class="w-fit px-2"
-                 [text]="authenticated ? 'Checkout' : 'Log in to proceed'"
-                 [size]="authenticated ? 'medium' : 'large'"
-                 color="primary"
-                 (clickEvent)="handlePreCheckout()">
-      </lc-button>
+    <div class="w-2/5 mt-5">
+      <lc-dropdown-section
+        [title]="SHIPPING_ADDRESS_TITLE"
+        [showContent]="true"
+        [content]="address">
+      </lc-dropdown-section>
+      <lc-dropdown-section
+        [title]="BILLING_ADDRESS_TITLE"
+        [showContent]="true"
+        [content]="billingAddress">
+      </lc-dropdown-section>
     </div>
   </div>
-  <div class="w-2/5 mt-5">
-    <lc-dropdown-section
-      [title]="SHIPPING_ADDRESS_TITLE"
-      [showContent]="true"
-      [content]="address">
-    </lc-dropdown-section>
-    <lc-dropdown-section
-      [title]="BILLING_ADDRESS_TITLE"
-      [showContent]="true"
-      [content]="billingAddress">
-    </lc-dropdown-section>
+  <div class="flex justify-between items-start h-54 p-10">
+    <span class="text-4xl font-bold">Total: {{ shoppingCartTotalPrice$ | async}} {{this.CURRENCY_SYMBOL}}</span>
+    <lc-button class="w-fit px-2"
+               [text]="authenticated ? 'Checkout' : 'Log in to proceed'"
+               [size]="authenticated ? 'medium' : 'large'"
+               color="primary"
+               (clickEvent)="handlePreCheckout()">
+    </lc-button>
   </div>
 </div>
 

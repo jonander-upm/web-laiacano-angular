@@ -5,8 +5,9 @@ export interface Order {
   shippingAddress: Address;
   billingAddress: Address;
   orderItems: OrderItem[];
-  status?: string;
+  status?: Status;
   price?: string;
+  createdDate?: string;
 }
 
 export interface Address {
@@ -30,4 +31,13 @@ export interface LcOrderItem {
   product: LcProductItem;
   amount: number;
   total: number;
+}
+
+export enum Status {
+  PENDING = 'Pending',
+  IN_PROGRESS = 'In Progress',
+  READY_TO_SHIP = 'Ready to Ship',
+  SHIPPED = 'Shipped',
+  DELIVERED = 'Delivered',
+  CANCELLED = 'Cancelled'
 }

@@ -5,7 +5,7 @@
   <div class="flex justify-between items-end">
     <span class="text-6xl">{{ title }} <span *ngIf="id" class="text-4xl"> #{{id}}</span> </span>
     <lc-button
-      *ngIf="hasFilters"
+      *ngIf="filters.length"
       class="h-fit w-fit"
       size="small"
       color="secondary"
@@ -15,6 +15,8 @@
     ></lc-button>
   </div>
   <lc-filter-section
+    *ngIf="filters.length"
     class="h-filter overflow-hidden"
+    [showFilters]="filters"
   ></lc-filter-section>
 </div>
