@@ -4,4 +4,5 @@ export enum Route {
   SHOPPING_CART = 'shopping-cart',
   ORDERS = 'orders',
   ORDER_SUMMARY = 'order/:id',
+  PORTFOLIO = 'portfolio',
 }

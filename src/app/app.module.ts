@@ -41,6 +41,7 @@ import { LcAmountSelectorComponent } from './shared/components/lc-amount-selecto
 import { OrderSummaryComponent } from './user/order-summary/order-summary.component';
 import { OrdersComponent } from './user/orders/orders.component';
 import { LcOrderSummaryCardComponent } from './shared/components/lc-order-summary-card/lc-order-summary-card.component';
+import { PortfolioComponent } from './user/portfolio/portfolio.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { LcOrderSummaryCardComponent } from './shared/components/lc-order-summar
     LcAmountSelectorComponent,
     OrderSummaryComponent,
     OrdersComponent,
-    LcOrderSummaryCardComponent
+    LcOrderSummaryCardComponent,
+    PortfolioComponent
   ],
     imports: [
         BrowserModule,

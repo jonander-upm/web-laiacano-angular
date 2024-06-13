@@ -1,8 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Order} from "../../services/order.model";
-import {Route} from "../../enums/route";
+import {Order, Status} from "../../services/order.model";
 import {Observable, of} from "rxjs";
-import {Product} from "../../services/product.model";
 import {ProductService} from "../../services/product.service";
 import {map} from "rxjs/operators";
 import {environment} from "../../../../environments/environment";
@@ -22,6 +20,9 @@ export class LcOrderSummaryCardComponent implements OnInit {
 
   firstProductImgUrl: Observable<string>;
 
+  get status() {
+    return Status[this.order.status];
+  }
   constructor(private readonly productService: ProductService) { }
 
   ngOnInit(): void {
@@ -30,5 +31,4 @@ export class LcOrderSummaryCardComponent implements OnInit {
       map(imageSrc => environment.REST_API + this.PORTFOLIO_IMAGE_ENDPOINT + imageSrc)
     );
   }
-
 }

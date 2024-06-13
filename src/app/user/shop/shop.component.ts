@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {ImageViewComponent} from "../../shared/dialogs/image-view/image-view.component";
 import {ProductService} from "../../shared/services/product.service";
@@ -12,7 +12,7 @@ import {ShoppingCartService} from "../../shared/services/shopping-cart.service";
   selector: 'lc-shop',
   templateUrl: './shop.component.html',
 })
-export class ShopComponent implements OnInit {
+export class ShopComponent implements OnInit, OnDestroy {
   readonly CURRENCY_SYMBOL = '$';
   readonly SOLD_OUT = 'Sold Out';
 
@@ -32,7 +32,7 @@ export class ShopComponent implements OnInit {
   private getProductList() {
     this.filterService.getFilters().pipe(
       mergeMap(filters =>
-        this.productService.getProducts(filters.title, filters.format)
+        this.productService.getProducts(filters.title, filters.format, filters.portfolioItemId)
       ),
       filter(products => products !== undefined),
         map(products =>
@@ -66,6 +66,10 @@ export class ShopComponent implements OnInit {
 
   addToCart(product: LcProductItem) {
     this.shoppingCartService.addProductToCart(product);
+  }
+
+  ngOnDestroy(): void {
+    this.filterService.setFilters({});
   }
 }
 

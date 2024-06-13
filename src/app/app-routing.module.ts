@@ -9,6 +9,7 @@ import {Route} from "./shared/enums/route";
 import {ShoppingCartComponent} from "./user/shopping-cart/shopping-cart.component";
 import {OrderSummaryComponent} from "./user/order-summary/order-summary.component";
 import {OrdersComponent} from "./user/orders/orders.component";
+import {PortfolioComponent} from "./user/portfolio/portfolio.component";
 
 const routes: Routes = [
   {
@@ -64,6 +65,18 @@ const routes: Routes = [
         filters: [],
         showCart: true,
         hasId: true,
+      }
+    },
+  },
+  {
+    path: Route.PORTFOLIO,
+    component: PortfolioComponent,
+    data: {
+      pageData: {
+        title: 'Portfolio',
+        filters: ['title'],
+        showCart: true,
+        hasId: false,
       }
     },
   },

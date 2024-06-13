@@ -1,0 +1,17 @@
+<div class="columns-3 gap-10 px-page pt-8">
+  <div
+    *ngFor="let item of portfolioItemList$ | async"
+    class="py-4 break-inside-avoid-column"
+  >
+    <lc-item-section
+      [title]="item.name"
+      [subtitle]="item.description"
+      [imageSrc]="item.imageSrc"
+      [clickableImg]="true"
+      [buttonText]="item.hasProducts ? 'Shop' : undefined"
+      [buttonIcon]="item.hasProducts ? 'visibility' : undefined"
+      (imageClick)="viewImage($event)"
+      (buttonClick)="viewInShop(item.id)"
+    ></lc-item-section>
+  </div>
+</div>

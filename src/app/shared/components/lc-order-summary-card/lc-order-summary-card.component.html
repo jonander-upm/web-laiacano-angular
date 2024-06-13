@@ -2,7 +2,9 @@
   <img [src]="firstProductImgUrl | async" alt="First product in the order" />
   <div class="flex flex-col w-full justify-between">
     <div class="flex justify-between items start">
-      <span class="text-2xl font-bold"> {{ order.status }} </span>
+      <span class="text-2xl font-bold"> Status:
+        <span class="text-xl font-medium">{{ status }}</span>
+      </span>
       <span class="text-lg"> {{ order.createdDate }} </span>
     </div>
     <div class="flex justify-between items-end">

@@ -26,6 +26,7 @@
       <span class="text-base font-bold">{{ subtitle }}</span>
     </div>
     <lc-button
+      *ngIf="buttonText || buttonIcon"
       class="w-fit"
       [text]="buttonText" color="primary"
       [icon]="buttonIcon"

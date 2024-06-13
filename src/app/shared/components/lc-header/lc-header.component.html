@@ -1,12 +1,14 @@
 <header class="h-header">
   <nav class="nav-left">
     <ul>
-      <li><lc-link-button text="Portfolio" size="responsive" [hrefLink]="Route.HOME"></lc-link-button></li>
+      <li><lc-link-button text="Portfolio" size="responsive" [hrefLink]="Route.PORTFOLIO"></lc-link-button></li>
       <li><lc-link-button text="Shop" size="responsive" [hrefLink]="Route.SHOP"></lc-link-button></li>
       <li><lc-link-button text="About me" size="responsive" [hrefLink]="Route.HOME"></lc-link-button></li>
     </ul>
   </nav>
-  <a id="main-logo" [routerLink]="Route.HOME">Laia Cano</a>
+  <a id="main-logo" [routerLink]="Route.HOME">
+    <img class="h-16 w-16" src="/assets/images/Logo.png" alt="Laia Cano Logo"/>
+  </a>
   <nav class="nav-right">
     <ul *ngIf="!isAuthenticated()">
       <li><lc-link-button text="Login" size="responsive" (btnClick)="login()"></lc-link-button></li>
